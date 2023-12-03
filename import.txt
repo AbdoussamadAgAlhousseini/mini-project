@@ -1,0 +1,77 @@
+-- Création de la base de données avec l'encodage UTF-8 et le moteur InnoDB
+CREATE DATABASE IF NOT EXISTS mini_project CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE mini_project;
+
+-- Définir le moteur de stockage par défaut sur InnoDB
+SET default_storage_engine=InnoDB;
+
+-- Table pour les informations des clients
+CREATE TABLE Clients (
+    ClientID INT PRIMARY KEY AUTO_INCREMENT,
+    Nom VARCHAR(50),
+    Prenom VARCHAR(50),
+    Email VARCHAR(100),
+    Telephone VARCHAR(20)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Table pour les destinations de voyages
+CREATE TABLE Destinations (
+    DestinationID INT PRIMARY KEY AUTO_INCREMENT,
+    NomDestination VARCHAR(100),
+    Description TEXT,
+    Prix DECIMAL(10, 2)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Table pour les réservations d'hôtels
+CREATE TABLE ReservationsHotels (
+    ReservationHotelID INT PRIMARY KEY AUTO_INCREMENT,
+    idclient INT,
+    DestinationID INT,
+    DateDebut DATE,
+    DateFin DATE,
+    NombrePersonnes INT,
+    FOREIGN KEY (ClientID) REFERENCES Clients(ClientID),
+    FOREIGN KEY (DestinationID) REFERENCES Destinations(DestinationID)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Table pour les réservations de vols
+CREATE TABLE ReservationsVols (
+    ReservationVolID INT PRIMARY KEY AUTO_INCREMENT,
+    idclient INT,
+    DestinationID INT,
+    DateDepart DATE,
+    DateRetour DATE,
+    NombrePassagers INT,
+    FOREIGN KEY (ClientID) REFERENCES Clients(ClientID),
+    FOREIGN KEY (DestinationID) REFERENCES Destinations(DestinationID)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Table pour les commentaires des clients sur leurs voyages
+CREATE TABLE Commentaires (
+    CommentaireID INT PRIMARY KEY AUTO_INCREMENT,
+   idclient INT,
+    DestinationID INT,
+    DateCommentaire DATE,
+    Commentaire TEXT,
+    FOREIGN KEY (ClientID) REFERENCES Clients(ClientID),
+    FOREIGN KEY (DestinationID) REFERENCES Destinations(DestinationID)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Table pour les notations des clients sur les destinations
+CREATE TABLE Notations (
+    NotationID INT PRIMARY KEY AUTO_INCREMENT,
+    idclient INT,
+    DestinationID INT,
+    Note INT,
+    FOREIGN KEY (ClientID) REFERENCES Clients(ClientID),
+    FOREIGN KEY (DestinationID) REFERENCES Destinations(DestinationID)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Table pour les administrateurs
+CREATE TABLE Admins (
+    AdminID INT PRIMARY KEY AUTO_INCREMENT,
+    NomAdmin VARCHAR(50),
+    PrenomAdmin VARCHAR(50),
+    EmailAdmin VARCHAR(100),
+    MotDePasse VARCHAR(50)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
