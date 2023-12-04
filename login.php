@@ -3,7 +3,7 @@ session_start(); // Démarrer la session
 
 // Vérifier si l'utilisateur est déjà connecté
 if (isset($_SESSION['idclient'])) {
-    header("Location: index.php"); // Rediriger vers la page d'accueil
+    header("Location: profil.php"); // Rediriger vers la page d'accueil
     exit();
 }
 
@@ -153,7 +153,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </button>
                 <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
                     <div class="navbar-nav ml-auto py-0">
-                        <a href="index.html" class="nav-item nav-link active">Accueil</a>
+                        <a href="index.php" class="nav-item nav-link active">Accueil</a>
                         <!-- <a href="about.html" class="nav-item nav-link">A propos</a>
                         <a href="service.html" class="nav-item nav-link">Services</a>
                         <a href="login.html" class="nav-item nav-link">Login</a> -->
