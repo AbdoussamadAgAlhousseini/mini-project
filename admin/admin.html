@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h2>ALMA</h2>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="admin.html">Admin</a>
+            <a href="booking.html">Bookings</a>
+            <a href="flights.html">Flights</a>
+            <a href="hotels.html">Hotels</a>
+        </div>
+
+        <div class="content">
+            <header>
+                <h1>Welcome to the Admin Dashboard</h1>
+            </header>
+
+            <main class="main">
+                <!-- Add Flight Section -->
+                <section id="add-flight">
+                    <h2>Add Flight</h2>
+                    <form id="addFlightForm" class="styled-form">
+                        <div class="form-group">
+                            <label for="flightName">Flight Name:</label>
+                            <input type="text" id="flightName" name="flightName" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="departureDate">Departure Date:</label>
+                            <input type="date" id="departureDate" name="departureDate" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="arrivalDate">Arrival Date:</label>
+                            <input type="date" id="arrivalDate" name="arrivalDate" required>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit">Add Flight</button>
+                        </div>
+                    </form>
+                </section>
+
+                <!-- Add Hotel Section -->
+                <section id="add-hotel">
+                    <h2>Add Hotel</h2>
+                    <form id="addHotelForm" class="styled-form">
+                        <div class="form-group">
+                            <label for="hotelName">Hotel Name:</label>
+                            <input type="text" id="hotelName" name="hotelName" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="checkInDate">Check-In Date:</label>
+                            <input type="date" id="checkInDate" name="checkInDate" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="checkOutDate">Check-Out Date:</label>
+                            <input type="date" id="checkOutDate" name="checkOutDate" required>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit">Add Hotel</button>
+                        </div>
+                    </form>
+                </section>
+            </main>
+
+            <footer>
+                <p>&copy; 2023 ALMA</p>
+            </footer>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>
