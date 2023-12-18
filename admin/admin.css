@@ -25,6 +25,7 @@ body {
     margin-bottom: 20px;
 }
 
+
 .sidebar a {
     display: block;
     padding: 10px;
@@ -32,6 +33,7 @@ body {
     color: white;
     font-weight: bold;
     border-bottom: 1px solid #555;
+    cursor: pointer;
 }
 
 .sidebar a:hover {
