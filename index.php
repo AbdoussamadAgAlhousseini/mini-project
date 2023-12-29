@@ -1,3 +1,41 @@
+<?php
+session_start();
+require_once("connexion.php");
+
+function getDestinationInfo($destinationId)
+{
+    global $connexion;
+
+    try {
+        $stmt = $connexion->prepare("SELECT NomDestination, Description FROM Destinations WHERE DestinationID = :destinationId");
+        $stmt->bindParam(':destinationId', $destinationId, PDO::PARAM_INT);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $result;
+    } catch (PDOException $e) {
+        echo "Erreur lors de la récupération des informations de la destination : " . $e->getMessage();
+        return false;
+    }
+}
+
+
+$destinationId = 1;
+$destinationInfo = getDestinationInfo($destinationId);
+
+
+if ($destinationInfo !== false) {
+    $nomDestination = $destinationInfo['NomDestination'];
+    $description = $destinationInfo['Description'];
+}
+?>
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -38,7 +76,37 @@
             padding-top: 3.6rem;
 
         }
+
+        .style {
+            display: flex;
+            align-items: center;
+        }
     </style>
+
+    <script>
+        function ajouterCommentaire() {
+
+            // Récupération des valeurs du formulaire
+            var idclient = document.getElementById("idclient").value;
+            var destinationID = document.getElementById("destinationID").value;
+            var commentaire = document.getElementById("commentaire").value;
+            $idclient = 1;
+
+            // Appel de la fonction d'ajout de commentaire
+            var nbCommentairesInseres = ajouterCommentaire(connexion, idclient, destinationID, commentaire);
+
+            if (nbCommentairesInseres > 0) {
+                // Message de succès
+                alert("Commentaire inséré avec succès !");
+            } else {
+                // Message d'erreur
+                alert("Une erreur s'est produite lors de l'insertion du commentaire.");
+            }
+            alert(commentaire);
+
+        }
+    </script>
+
 </head>
 
 <body>
@@ -88,17 +156,7 @@
                         <a href="index.html" class="nav-item nav-link active">Accueil</a>
                         <a href="about.html" class="nav-item nav-link">A propos</a>
                         <a href="service.html" class="nav-item nav-link">Services</a>
-                        <!-- <a href="package.html" class="nav-item nav-link">Tour Packages</a>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
-                            <div class="dropdown-menu border-0 rounded-0 m-0">
-                                <a href="blog.html" class="dropdown-item">Blog Grid</a>
-                                <a href="single.html" class="dropdown-item">Blog Detail</a>
-                                <a href="destination.html" class="dropdown-item">Destination</a>
-                                <a href="guide.html" class="dropdown-item">Travel Guides</a>
-                                <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                            </div>
-                        </div> -->
+
                         <a href="contact.html" class="nav-item nav-link">Contact</a>
 
                         <a href="login.php" class="nav-item nav-link"><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
@@ -153,73 +211,7 @@
             </a>
         </div>
     </div>
-    <!-- Carousel End -->
 
-
-    <!-- Booking Start -->
-    <form action="destination.php" method="post">
-
-        <div class="container-fluid booking mt-5 pb-5">
-            <div class="container pb-5">
-                <div class="bg-light shadow" style="padding: 30px;">
-                    <div class="row align-items-center" style="min-height: 60px;">
-
-                        <div class="col-md-10">
-
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <div class="mb-3 mb-md-0">
-                                        <select name="destination" class="custom-select px-4" style="height: 47px;">
-                                            <option selected>Destination</option>
-                                            <option value="1">Destination 1</option>
-                                            <option value="2">Destination 2</option>
-                                            <option value="3">Destination 3</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="mb-3 mb-md-0">
-                                        <div class="date" id="date1" data-target-input="nearest">
-                                            <input name="depart_date" type="text" class="form-control p-4 datetimepicker-input" placeholder="Depart Date" data-target="#date1" data-toggle="datetimepicker" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="mb-3 mb-md-0">
-                                        <div class="date" id="date2" data-target-input="nearest">
-                                            <input name="return_date" type="text" class="form-control p-4 datetimepicker-input" placeholder="Return Date" data-target="#date2" data-toggle="datetimepicker" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="mb-3 mb-md-0">
-                                        <select name="duration" class="custom-select px-4" style="height: 47px;">
-                                            <option selected>Duration</option>
-                                            <option value="1">Duration 1</option>
-                                            <option value="2">Duration 2</option>
-                                            <option value="3">Duration 3</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <!-- <button type="submit">Envoyer</button> -->
-
-                            </div>
-
-                        </div>
-                        <div class="col-md-2">
-                            <button class="btn btn-primary btn-block" type="submit" style="height: 47px; margin-top: -2px;">Submit</button>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </form>
-
-    <!-- Booking End -->
-
-
-    <!-- About Start -->
     <div class="container-fluid py-5">
         <div class="container pt-5">
             <div class="row">
@@ -398,140 +390,120 @@
             </div>
         </div>
     </div>
-    <!-- Service End -->
 
 
-    <!-- Packages Start -->
-    <div class="container-fluid py-5">
-        <div class="container pt-5 pb-3">
-            <div class="text-center mb-3 pb-3">
-                <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">Packages</h6>
-                <h1>Pefect Tour Packages</h1>
-            </div>
-            <div class="row">
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="package-item bg-white mb-2">
-                        <img class="img-fluid" src="img/im1.jpg" alt="">
-                        <div class="p-4">
-                            <div class="d-flex justify-content-between mb-3">
-                                <small class="m-0"><i class="fa fa-map-marker-alt text-primary mr-2"></i>Thailand</small>
-                                <small class="m-0"><i class="fa fa-calendar-alt text-primary mr-2"></i>3 days</small>
-                                <small class="m-0"><i class="fa fa-user text-primary mr-2"></i>2 Person</small>
-                            </div>
-                            <a class="h5 text-decoration-none" href="">Discover amazing places of the world with us</a>
-                            <div class="border-top mt-4 pt-4">
-                                <div class="d-flex justify-content-between">
-                                    <h6 class="m-0"><i class="fa fa-star text-primary mr-2"></i>4.5 <small>(250)</small>
-                                    </h6>
-                                    <h5 class="m-0">$350</h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="package-item bg-white mb-2">
-                        <img class="img-fluid" src="img/package-2.jpg" alt="">
-                        <div class="p-4">
-                            <div class="d-flex justify-content-between mb-3">
-                                <small class="m-0"><i class="fa fa-map-marker-alt text-primary mr-2"></i>Thailand</small>
-                                <small class="m-0"><i class="fa fa-calendar-alt text-primary mr-2"></i>3 days</small>
-                                <small class="m-0"><i class="fa fa-user text-primary mr-2"></i>2 Person</small>
-                            </div>
-                            <a class="h5 text-decoration-none" href="">Discover amazing places of the world with us</a>
-                            <div class="border-top mt-4 pt-4">
-                                <div class="d-flex justify-content-between">
-                                    <h6 class="m-0"><i class="fa fa-star text-primary mr-2"></i>4.5 <small>(250)</small>
-                                    </h6>
-                                    <h5 class="m-0">$350</h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="package-item bg-white mb-2">
-                        <img class="img-fluid" src="img/img2.jpg" alt="">
-                        <div class="p-4">
-                            <div class="d-flex justify-content-between mb-3">
-                                <small class="m-0"><i class="fa fa-map-marker-alt text-primary mr-2"></i>Thailand</small>
-                                <small class="m-0"><i class="fa fa-calendar-alt text-primary mr-2"></i>3 days</small>
-                                <small class="m-0"><i class="fa fa-user text-primary mr-2"></i>2 Person</small>
-                            </div>
-                            <a class="h5 text-decoration-none" href="">Discover amazing places of the world with us</a>
-                            <div class="border-top mt-4 pt-4">
-                                <div class="d-flex justify-content-between">
-                                    <h6 class="m-0"><i class="fa fa-star text-primary mr-2"></i>4.5 <small>(250)</small>
-                                    </h6>
-                                    <h5 class="m-0">$350</h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="package-item bg-white mb-2">
-                        <img class="img-fluid" src="img/package-4.jpg" alt="">
-                        <div class="p-4">
-                            <div class="d-flex justify-content-between mb-3">
-                                <small class="m-0"><i class="fa fa-map-marker-alt text-primary mr-2"></i>Thailand</small>
-                                <small class="m-0"><i class="fa fa-calendar-alt text-primary mr-2"></i>3 days</small>
-                                <small class="m-0"><i class="fa fa-user text-primary mr-2"></i>2 Person</small>
-                            </div>
-                            <a class="h5 text-decoration-none" href="">Discover amazing places of the world with us</a>
-                            <div class="border-top mt-4 pt-4">
-                                <div class="d-flex justify-content-between">
-                                    <h6 class="m-0"><i class="fa fa-star text-primary mr-2"></i>4.5 <small>(250)</small>
-                                    </h6>
-                                    <h5 class="m-0">$350</h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="package-item bg-white mb-2">
-                        <img class="img-fluid" src="img/im3.jpg" alt="">
-                        <div class="p-4">
-                            <div class="d-flex justify-content-between mb-3">
-                                <small class="m-0"><i class="fa fa-map-marker-alt text-primary mr-2"></i>Thailand</small>
-                                <small class="m-0"><i class="fa fa-calendar-alt text-primary mr-2"></i>3 days</small>
-                                <small class="m-0"><i class="fa fa-user text-primary mr-2"></i>2 Person</small>
-                            </div>
-                            <a class="h5 text-decoration-none" href="">Discover amazing places of the world with us</a>
-                            <div class="border-top mt-4 pt-4">
-                                <div class="d-flex justify-content-between">
-                                    <h6 class="m-0"><i class="fa fa-star text-primary mr-2"></i>4.5 <small>(250)</small>
-                                    </h6>
-                                    <h5 class="m-0">$350</h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="package-item bg-white mb-2">
-                        <img class="img-fluid" src="img/im4.jpg" alt="">
-                        <div class="p-4">
-                            <div class="d-flex justify-content-between mb-3">
-                                <small class="m-0"><i class="fa fa-map-marker-alt text-primary mr-2"></i>Thailand</small>
-                                <small class="m-0"><i class="fa fa-calendar-alt text-primary mr-2"></i>3 days</small>
-                                <small class="m-0"><i class="fa fa-user text-primary mr-2"></i>2 Person</small>
-                            </div>
-                            <a class="h5 text-decoration-none" href="">Discover amazing places of the world with us</a>
-                            <div class="border-top mt-4 pt-4">
-                                <div class="d-flex justify-content-between">
-                                    <h6 class="m-0"><i class="fa fa-star text-primary mr-2"></i>4.5 <small>(250)</small>
-                                    </h6>
-                                    <h5 class="m-0">$350</h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <?php
+
+    function getAllDestinations()
+    {
+        global $connexion;
+
+        try {
+            $stmt = $connexion->prepare("SELECT * FROM Destinations");
+            $stmt->execute();
+            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            return $results;
+        } catch (PDOException $e) {
+            echo "Erreur lors de la récupération de toutes les destinations : " . $e->getMessage();
+            return false;
+        }
+    }
+
+
+    function getAverageRatingForPackage($packageId)
+    {
+        global $connexion;
+
+        try {
+            $stmt = $connexion->prepare("SELECT AVG(Note) AS averageRating FROM Notations WHERE DestinationID = :packageId");
+            $stmt->bindParam(':packageId', $packageId, PDO::PARAM_INT);
+            $stmt->execute();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            return $result['averageRating'] ?: 0;
+        } catch (PDOException $e) {
+            echo "Erreur lors de la récupération de la note moyenne : " . $e->getMessage();
+        }
+    }
+
+    function getNumberOfRatingsForPackage($packageId)
+    {
+        global $connexion;
+
+        try {
+            $stmt = $connexion->prepare("SELECT COUNT(*) AS numberOfRatings FROM Notations WHERE DestinationID = :packageId");
+            $stmt->bindParam(':packageId', $packageId, PDO::PARAM_INT);
+            $stmt->execute();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            return $result['numberOfRatings'] ?: 0;
+        } catch (PDOException $e) {
+            echo "Erreur lors de la récupération du nombre de notations : " . $e->getMessage();
+        }
+    }
+
+
+    $destinations = getAllDestinations();
+
+
+    if ($destinations !== false) {
+        echo '<div class="container-fluid py-5">';
+        echo '    <div class="container pt-5 pb-3">';
+        echo '        <div class="text-center mb-3 pb-3">';
+        echo '            <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">Packages</h6>';
+        echo '            <h1>Pefect Tour Packages</h1>';
+        echo '        </div>';
+        echo '        <div class="row">';
+
+        foreach ($destinations as $destination) {
+            $destinationId = $destination['DestinationID'];
+            $nomDestination = $destination['NomDestination'];
+            $description = $destination['Description'];
+            $prix = $destination['Prix'];
+            $_SESSION['destinationId'] = $destinationId;
+
+            echo '            <div class="col-lg-4 col-md-6 mb-4">';
+            echo '                <div class="package-item bg-white mb-2">';
+            echo '                    <img class="img-fluid" src="img/im1.jpg" alt="">'; // Assurez-vous d'ajuster le chemin de l'image
+            echo '                    <div class="p-4">';
+            echo '                        <div class="d-flex justify-content-between mb-3">';
+            echo '                            <small class="m-0"><i class="fa fa-map-marker-alt text-primary mr-2"></i>' . $nomDestination . '</small>';
+            // echo '                            <small class="m-0"><i class="fa fa-calendar-alt text-primary mr-2"></i>3 days</small>';
+            // echo '                            <small class="m-0"><i class="fa fa-user text-primary mr-2"></i>2 Person</small>';
+            echo ' <div class="rating" id="ratingStars">
+            <span class="star" onclick="rate(1)">&#9733;</span>
+            <span class="star" onclick="rate(2)">&#9733;</span>
+            <span class="star" onclick="rate(3)">&#9733;</span>
+            <span class="star" onclick="rate(4)">&#9733;</span>
+            <span class="star" onclick="rate(5)">&#9733;</span>
+        </div>';
+            echo '                        </div>';
+            echo '                        <a class="h5 text-decoration-none" href="">' . $description . '</a>';
+            echo '                        <div class="border-top mt-4 pt-4">';
+            echo '                            <div class="d-flex justify-content-between">';
+            echo '                                <h6 class="m-0"><i class="fa fa-star text-primary mr-2"></i>';
+            echo '                                    ' . number_format(getAverageRatingForPackage($destinationId), 1);
+            echo '                                    <small>(' . getNumberOfRatingsForPackage($destinationId) . ')</small>';
+            echo '                                </h6>';
+            echo '                                <h5 class="m-0">$' . $prix . '</h5>';
+            echo '                            </div>';
+            echo '                        </div>';
+            echo '                    </div>';
+            echo '                </div>';
+            echo '            </div>';
+        }
+
+        echo '        </div>';
+        echo '    </div>';
+        echo '</div>';
+    } else {
+        echo "Aucune destination trouvée.";
+    }
+    ?>
+
+
+
     <!-- Packages End -->
 
 
@@ -557,32 +529,7 @@
                     </ul>
                 </div>
                 <div class="col-lg-5">
-                    <div class="card border-0">
-                        <div class="card-header bg-primary text-center p-4">
-                            <h1 class="text-white m-0">Sign Up Now</h1>
-                        </div>
-                        <div class="card-body rounded-bottom bg-white p-5">
-                            <form>
-                                <div class="form-group">
-                                    <input type="text" class="form-control p-4" placeholder="Your name" required="required" />
-                                </div>
-                                <div class="form-group">
-                                    <input type="email" class="form-control p-4" placeholder="Your email" required="required" />
-                                </div>
-                                <div class="form-group">
-                                    <select class="custom-select px-4" style="height: 47px;">
-                                        <option selected>Select a destination</option>
-                                        <option value="1">destination 1</option>
-                                        <option value="2">destination 1</option>
-                                        <option value="3">destination 1</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <button class="btn btn-primary btn-block py-3" type="submit">Sign Up Now</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -645,51 +592,53 @@
                 <h1>What Say Our Clients</h1>
             </div>
             <div class="owl-carousel testimonial-carousel">
-                <div class="text-center pb-4">
-                    <img class="img-fluid mx-auto" src="img/testimonial-1.jpg" style="width: 100px; height: 100px;">
-                    <div class="testimonial-text bg-white p-4 mt-n5">
-                        <p class="mt-5">Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod
-                            eos labore diam
-                        </p>
-                        <h5 class="text-truncate">Client Name</h5>
-                        <span>Profession</span>
-                    </div>
-                </div>
-                <div class="text-center">
-                    <img class="img-fluid mx-auto" src="img/testimonial-2.jpg" style="width: 100px; height: 100px;">
-                    <div class="testimonial-text bg-white p-4 mt-n5">
-                        <p class="mt-5">Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod
-                            eos labore diam
-                        </p>
-                        <h5 class="text-truncate">Client Name</h5>
-                        <span>Profession</span>
-                    </div>
-                </div>
-                <div class="text-center">
-                    <img class="img-fluid mx-auto" src="img/testimonial-3.jpg" style="width: 100px; height: 100px;">
-                    <div class="testimonial-text bg-white p-4 mt-n5">
-                        <p class="mt-5">Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod
-                            eos labore diam
-                        </p>
-                        <h5 class="text-truncate">Client Name</h5>
-                        <span>Profession</span>
-                    </div>
-                </div>
-                <div class="text-center">
-                    <img class="img-fluid mx-auto" src="img/testimonial-4.jpg" style="width: 100px; height: 100px;">
-                    <div class="testimonial-text bg-white p-4 mt-n5">
-                        <p class="mt-5">Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod
-                            eos labore diam
-                        </p>
-                        <h5 class="text-truncate">Client Name</h5>
-                        <span>Profession</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Testimonial End -->
+                <?php
 
+
+
+                try {
+
+                    $dbh = new PDO('mysql:host=localhost;dbname=projet', 'root', 'root');
+
+
+                    $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+
+                    $sql = "SELECT Commentaires.Commentaire, Commentaires.DateCommentaire, Clients.Nom
+            FROM Commentaires
+            LEFT JOIN Clients ON Commentaires.idclient = Clients.idclient
+            ORDER BY Commentaires.DateCommentaire DESC
+            LIMIT 10";
+
+                    $stmt = $dbh->query($sql);
+
+
+                    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+
+
+                        echo '<div class="text-center">';
+                        echo '    <img class="img-fluid mx-auto" src="img/testimonial-4.jpg" style="width: 100px; height: 100px;">';
+                        echo '    <div class="testimonial-text bg-white p-4 mt-n5">';
+                        echo '        <p class="mt-5">' . $row['Commentaire'] . '</p>';
+                        echo '        <h5 class="text-truncate">' . $row['Nom'] . '</h5>';
+                        echo '        <span>' . $row['DateCommentaire'] . '</span>';
+                        echo '    </div>';
+                        echo '</div>';
+                    }
+                } catch (PDOException $e) {
+                    echo "Erreur lors de la récupération des commentaires : " . $e->getMessage();
+                }
+
+                // Fermer la connexion à la base de données
+                $dbh = null;
+                ?>
+
+
+            </div>
+
+        </div>
+
+    </div>
 
 
 
@@ -786,6 +735,23 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        function rate(selectedStar) {
+            // Envoie du numéro de l'étoile au script PHP côté serveur
+            $.ajax({
+                type: "POST",
+                url: "script.php", // Remplacez script.php par le nom de votre script PHP
+                data: {
+                    starNumber: selectedStar
+                },
+                success: function(response) {
+                    console.log(response); // Afficher la réponse du serveur (si nécessaire)
+                }
+            });
+        }
+    </script>
 </body>
 
 </html>

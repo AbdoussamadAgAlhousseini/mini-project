@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Réservation d'hôtel</title>
+    <style>
+        /* Ajoutez ici votre propre style CSS si nécessaire */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+
+    <form id="reservationForm">
+        <label for="startDate">Date de départ :</label>
+        <input type="date" id="startDate" name="startDate" required>
+
+        <label for="endDate">Date de retour :</label>
+        <input type="date" id="endDate" name="endDate" required>
+
+        <label for="city">Ville :</label>
+        <select id="city" name="city" required>
+            <option value="paris">Paris</option>
+            <option value="london">Londres</option>
+            <option value="newyork">New York</option>
+            <!-- Ajoutez d'autres options selon vos besoins -->
+        </select>
+
+        <label for="hotelName">Nom de l'hôtel :</label>
+        <select id="hotelName" name="hotelName" required>
+            <!-- Les options d'hôtel pourraient être chargées dynamiquement en fonction de la ville sélectionnée -->
+        </select>
+
+        <label for="roomType">Type de chambre :</label>
+        <select id="roomType" name="roomType" required>
+            <option value="single">Chambre simple</option>
+            <option value="double">Chambre double</option>
+            <option value="suite">Suite</option>
+        </select>
+
+        <label for="numberOfPeople">Nombre de personnes :</label>
+        <input type="number" id="numberOfPeople" name="numberOfPeople" min="1" required>
+
+        <label for="price">Prix total (en euros) :</label>
+        <input type="text" id="price" name="price" readonly>
+
+        <button type="submit">Réserver</button>
+    </form>
+
+    <script>
+        document.getElementById("reservationForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const startDate = new Date(document.getElementById("startDate").value);
+            const endDate = new Date(document.getElementById("endDate").value);
+
+            if (startDate >= endDate) {
+                alert("La date de départ doit être avant la date de retour.");
+                return;
+            }
+
+            const durationInDays = Math.floor((endDate - startDate) / (24 * 60 * 60 * 1000));
+            const roomPrice = getRoomPrice(document.getElementById("roomType").value);
+            const numberOfPeople = document.getElementById("numberOfPeople").value;
+
+            const totalPrice = durationInDays * roomPrice * numberOfPeople;
+
+            document.getElementById("price").value = totalPrice;
+        });
+
+        // Exemple de chargement dynamique des hôtels en fonction de la ville sélectionnée
+        document.getElementById("city").addEventListener("change", function () {
+            const selectedCity = document.getElementById("city").value;
+            // Vous devriez charger dynamiquement les hôtels en fonction de la ville depuis votre backend
+            // Remplacez le contenu de #hotelName avec les options d'hôtel appropriées
+            document.getElementById("hotelName").innerHTML = `<option value="hotel1">Hôtel 1 à ${selectedCity}</option>
+                                                              <option value="hotel2">Hôtel 2 à ${selectedCity}</option>`;
+            // Vous pouvez également charger ces options depuis une API ou une base de données
+        });
+
+        // Exemple de mise à jour du prix en fonction du type de chambre
+        document.getElementById("roomType").addEventListener("change", function () {
+            const selectedRoomType = document.getElementById("roomType").value;
+            // Vous devriez charger dynamiquement les prix en fonction du type de chambre depuis votre backend
+            // Remplacez la valeur de #price avec le prix approprié
+            document.getElementById("price").value = getRoomPrice(selectedRoomType) + " DZ";
+            // Vous pouvez également charger ces prix depuis une API ou une base de données
+        });
+
+        // Fonction de démo pour obtenir le prix en fonction du type de chambre (à personnaliser)
+        function getRoomPrice(roomType) {
+            switch (roomType) {
+                case "single":
+                    return 100;
+                case "double":
+                    return 150;
+                case "suite":
+                    return 200;
+                default:
+                    return 0;
+            }
+        }
+    </script>
+
+</body>
+
+</html>

@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $requeteEmailExiste->execute([$email]);
     $emailExiste = $requeteEmailExiste->fetch();
 
-    if (!$emailExiste) {
+    if ($emailExiste) {
         $erreur = "Cet email est déjà utilisé. Veuillez en choisir un autre.";
     } else {
         // Préparer la requête SQL pour l'insertion (assurez-vous d'ajuster la structure de votre table)
