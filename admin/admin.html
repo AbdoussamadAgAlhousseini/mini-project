@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="flight.css">
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h2>ALMA</h2>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="admin.html">Admin</a>
+            <a href="booking.html">Bookings</a>
+            <a href="flights.html">Flights</a>
+            <a href="hotels.html">Hotels</a>
+        </div>
+
+        <div class="content">
+            <header>
+                <h1>Welcome to the Admin Dashboard</h1>
+            </header>
+
+            <main class="main">
+                <div class="title"><h1>flights manager</h1></div>
+
+                <form action="" method="post" class="form">
+                
+                <fieldset>
+                    <div class="depart">
+                        <legend class="legend"><span class="number">1</span> flight information</legend>
+                            <div class="label_input">
+                                <input type="text" name="" id="myInput" placeholder="departure" >
+                                <input type="date" name="departure" placeholder="date">
+                            </div>
+                            <div class="label_input">
+                                <input type="text" name="" id="myInput" placeholder="arrival" >
+                                <input type="date" name="departure" placeholder="date">
+                            </div>
+                    </div>
+                    <div class="btn">
+                        <button type="submit">Add flight</button>
+                    </div> 
+                   
+                    
+                </fieldset>                
+              </form>
+                <div class="title"><h1>hotel manager</h1></div>
+
+                <form action="" method="post" class="form">
+                
+                <fieldset>
+                    <div class="depart">
+                        <legend class="legend"><span class="number">2</span> hotel information</legend>
+                            <div class="label_input">
+                                <input type="text" name="" id="myInput" placeholder="hotel name" >
+                                <input type="date" name="departure" placeholder="date">
+                            </div>
+                            <div class="label_input">
+                                <input type="text" name="" id="myInput" placeholder="location" >
+                                <input type="date" name="departure" placeholder="date">
+                            </div>
+                    </div>
+                    <div class="btn">
+                        <button type="submit">Add hotel</button>
+                    </div> 
+                   
+                    
+                </fieldset>                
+              </form>
+
+                
+            </main>
+
+           
+        </div>
+    </div>
+
+    <script src="admin.js">
+      
+    </script>
+</body>
+</html>

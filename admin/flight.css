@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,600;1,200&display=swap');
+
+
+body {
+    font-family: poppins, sans-serif;
+    margin: 0;
+    padding: 0; 
+}
+.main {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.sidebar {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    width: 200px;
+    box-sizing: border-box;
+    height: 100vh; 
+    position: fixed; 
+}
+
+.sidebar h2 {
+    margin-bottom: 20px;
+}
+
+
+.sidebar a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    border-bottom: 1px solid #555;
+    cursor: pointer;
+}
+
+.sidebar a:hover {
+    background-color: #555;
+}
+
+.content {
+    flex-grow: 1;
+    padding: 20px;
+    box-sizing: border-box;
+    margin-left: 200px; 
+}
+
+header {
+    background-color: #555;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+.title{
+    text-align: center;
+    text-transform: capitalize;
+    font-weight: 600;
+}
+
+
+form {
+    width: 700;
+}
+
+.number {
+    background-color: #5fcf80;
+    color: #fff;
+    height: 30px;
+    width: 30px;
+    display: inline-block;
+    font-size: 0.8em;
+    margin-right: 10px;
+    line-height: 30px;
+    text-align: center;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.2);
+    border-radius: 50%;
+  }
+  .legend {
+      display: flex;
+      align-items: center;
+      margin: 20px 0px 20px 0px;
+      font-size: larger;
+      text-transform: uppercase;
+      font-weight: bolder;
+  }
+
+
+.label_input{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 100px;
+}
+
+
+input[type="text"],
+input[type="password"],
+input[type="date"],
+input[type="datetime"],
+input[type="email"],
+input[type="number"],
+input[type="search"],
+input[type="tel"],
+input[type="time"],
+input[type="url"],
+textarea,
+select {
+  background: rgba(255,255,255,0.1);
+  border: none;
+  font-size: 16px;
+  height: auto;
+  margin: 0;
+  text-align: center;
+  outline: 0;
+  padding: 15px;
+  width: 100%;
+  background-color: #e8eeef;
+  color: #1e272e;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
+  margin-bottom: 30px;
+}
+
+button{
+    padding: 10px 20px;
+    cursor: pointer;
+    color: #FFF;
+    background-color: #4bc970;
+    font-size: 18px;
+    text-align: center;
+    font-style: normal;
+    border-radius: 5px;
+    width: 30%;
+    border: 1px solid #3ac162;
+    border-width: 1px 1px 3px;
+    box-shadow: 0 -1px 0 rgba(255,255,255,0.1) inset;
+    margin-bottom: 10px;
+}
+
+.btn {
+    display: flex;
+    justify-content: center;
+}

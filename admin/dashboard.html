@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="admin.css">
+    
+    <!-- Add these script tags in the <head> section -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgDAWUnIcFIIjF" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha384-o3Fu9MOG54F11bv7R8Kv6apG5TfcWcAVKRd/TOM/KSc/kpXthJG6JRB5eM+2OrHb" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha384-oM5IG89b0IYJ4ot73vWd33OVlvs1Rm8zjzoKhmOKhz/3v7pWUpF8XvIbKRqq3ImB" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js" integrity="sha384-aQqBLMjQFOeA1zRoVDI7Fh1MCA9cZOOqb4Tcvh5FLD3FpqXsz/zoIU2C9IKX6xCa" crossorigin="anonymous"></script>
+
+
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <a href="dashboard.html"><h2>ALMA</h2></a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="admin.html">Admin</a>
+            <a href="booking.html">Bookings</a>
+            <a href="flights.html">Flights</a>
+            <a href="hotels.html">Hotels</a>
+        </div>
+
+        <div class="content">
+            <header>
+                <h1>Welcome to the Admin Dashboard</h1>
+            </header>
+
+            <main class="main">
+                <div class="card admin">
+                    <h2>Admin</h2>
+                    <p>Manage admin panel.</p>
+                    <a href="admin.html" class="arrow">&#10140;</a>
+                </div>
+
+                <div class="card booking">
+                    <h2>Bookings</h2>
+                    <p>Manage booking details.</p>
+                    <a href="booking.html" class="arrow">&#10140;</a>
+                </div>
+
+                <div class="card flights">
+                    <h2>Flights</h2>
+                    <p>View and manage flights.</p>
+                    <a href="flights.html" class="arrow">&#10140;</a>
+                </div>
+
+                <div class="card hotels">
+                    <h2>Hotels</h2>
+                    <p>View and manage hotels.</p>
+                    <a href="hotels.html" class="arrow">&#10140;</a>
+                </div>
+
+                <div class="second_section">
+                    <div class="recent-activities">
+                        <h2>Recent Activities</h2>
+                    </div>
+                    <!-- Statistics Section -->
+                    <div class="statistics">
+                        <h2>Statistics</h2>
+                        <div class="stat-item">
+                            <h3>Total Flights</h3>
+                            
+                        </div>
+                        <div class="stat-item">
+                            <h3>Total Clients</h3>
+                            
+                        </div>
+                    </div>
+                    <div id="calendar"></div>
+                </div>
+    </main>
+</body>
+</html>
