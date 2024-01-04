@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt = $conn->prepare("INSERT INTO Notations (idclient, DestinationID, Note) VALUES (:idclient, :destinationID, :starNumber)");
 
         // Ajoutez des valeurs fictives pour idclient et DestinationID (ajustez-les en fonction de vos besoins)
-        // $idclient = 1;
+        $idclient = $_SESSION["idclient"];
         $destinationID = $_SESSION['destinationId'];
 
         // Liez les paramètres

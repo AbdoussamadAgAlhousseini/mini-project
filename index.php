@@ -81,6 +81,22 @@ if ($destinationInfo !== false) {
             display: flex;
             align-items: center;
         }
+
+        .rating {
+            font-size: 24px;
+            cursor: pointer;
+            /* Ajustez la taille des étoiles selon vos besoins */
+        }
+
+        .star {
+            color: gold;
+            /* Couleur des étoiles remplies */
+        }
+
+        /* Style pour étoiles non remplies (cinq étoiles vides) */
+        .star:empty {
+            color: #ddd;
+        }
     </style>
 
     <script>
@@ -445,7 +461,7 @@ if ($destinationInfo !== false) {
 
 
     $destinations = getAllDestinations();
-
+    $_SESSION['destinationIds'] = array();
 
     if ($destinations !== false) {
         echo '<div class="container-fluid py-5">';
@@ -461,7 +477,7 @@ if ($destinationInfo !== false) {
             $nomDestination = $destination['NomDestination'];
             $description = $destination['Description'];
             $prix = $destination['Prix'];
-            $_SESSION['destinationId'] = $destinationId;
+            $_SESSION['destinationIds'][] = $destinationId;
 
             echo '            <div class="col-lg-4 col-md-6 mb-4">';
             echo '                <div class="package-item bg-white mb-2">';
@@ -471,13 +487,23 @@ if ($destinationInfo !== false) {
             echo '                            <small class="m-0"><i class="fa fa-map-marker-alt text-primary mr-2"></i>' . $nomDestination . '</small>';
             // echo '                            <small class="m-0"><i class="fa fa-calendar-alt text-primary mr-2"></i>3 days</small>';
             // echo '                            <small class="m-0"><i class="fa fa-user text-primary mr-2"></i>2 Person</small>';
-            echo ' <div class="rating" id="ratingStars">
-            <span class="star" onclick="rate(1)">&#9733;</span>
-            <span class="star" onclick="rate(2)">&#9733;</span>
-            <span class="star" onclick="rate(3)">&#9733;</span>
-            <span class="star" onclick="rate(4)">&#9733;</span>
-            <span class="star" onclick="rate(5)">&#9733;</span>
-        </div>';
+            //     echo ' <div class="rating" id="ratingStars">
+            //     <span class="star" onclick="rate(1)">&#9733;</span>
+            //     <span class="star" onclick="rate(2)">&#9733;</span>
+            //     <span class="star" onclick="rate(3)">&#9733;</span>
+            //     <span class="star" onclick="rate(4)">&#9733;</span>
+            //     <span class="star" onclick="rate(5)">&#9733;</span>
+            // </div>';
+
+            echo '<div class="rating" data-destination-id="' . $destinationId . '">';
+            echo '<span class="star" onclick="rate(1)">&#9733;</span>';
+            echo '<span class="star" onclick="rate(2)">&#9733;</span>';
+            echo '<span class="star" onclick="rate(3)">&#9733;</span>';
+            echo '<span class="star" onclick="rate(4)">&#9733;</span>';
+            echo '<span class="star" onclick="rate(5)">&#9733;</span>';
+            echo '</div>';
+
+
             echo '                        </div>';
             echo '                        <a class="h5 text-decoration-none" href="">' . $description . '</a>';
             echo '                        <div class="border-top mt-4 pt-4">';

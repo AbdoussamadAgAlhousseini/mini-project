@@ -81,20 +81,23 @@ try {
     // Récupérer les données du formulaire
     $commentaire = $_POST['commentaire'];
 
+    if (!empty($commentaire)) {
+        $sql = "INSERT INTO Commentaires (idclient, DestinationID, DateCommentaire, Commentaire)
+        VALUES (:idclient, :DestinationID, NOW(), :commentaire)";
+
+        // Remplacez idclient et DestinationID par les valeurs appropriées
+        $idclient = $id; // Exemple, remplacez par la valeur réelle
+        // $DestinationID = $DestinationID; // Exemple, remplacez par la valeur réelle
+
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindParam(':idclient', $idclient, PDO::PARAM_INT);
+        $stmt->bindParam(':DestinationID', $DestinationID, PDO::PARAM_INT);
+        $stmt->bindParam(':commentaire', $commentaire, PDO::PARAM_STR);
+
+        $stmt->execute();
+    }
+
     // Exécuter la requête SQL d'insertion
-    $sql = "INSERT INTO Commentaires (idclient, DestinationID, DateCommentaire, Commentaire)
-            VALUES (:idclient, :DestinationID, NOW(), :commentaire)";
-
-    // Remplacez idclient et DestinationID par les valeurs appropriées
-    $idclient = $id; // Exemple, remplacez par la valeur réelle
-    // $DestinationID = $DestinationID; // Exemple, remplacez par la valeur réelle
-
-    $stmt = $dbh->prepare($sql);
-    $stmt->bindParam(':idclient', $idclient, PDO::PARAM_INT);
-    $stmt->bindParam(':DestinationID', $DestinationID, PDO::PARAM_INT);
-    $stmt->bindParam(':commentaire', $commentaire, PDO::PARAM_STR);
-
-    $stmt->execute();
 
     // echo "Commentaire ajouté avec succès" . $commentaire;
 } catch (PDOException $e) {
@@ -616,7 +619,7 @@ if ($destinationInfo !== false) {
 
 
 
-        <div class="rating" id="ratingStars">
+        <!-- <div class="rating" id="ratingStars">
             <span class="star" onclick="rate(1)">&#9733;</span>
             <span class="star" onclick="rate(2)">&#9733;</span>
             <span class="star" onclick="rate(3)">&#9733;</span>
@@ -638,7 +641,7 @@ if ($destinationInfo !== false) {
                     }
                 });
             }
-        </script>
+        </script> -->
 
 
         <?php require_once('footer.php'); ?>
