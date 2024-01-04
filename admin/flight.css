@@ -50,7 +50,7 @@ body {
 }
 
 header {
-    background-color: #555;
+    background-color: #4caf50;
     color: white;
     padding: 10px;
     text-align: center;
@@ -60,87 +60,63 @@ header {
     text-transform: capitalize;
     font-weight: 600;
 }
-
-
+/* Apply basic styling to the form */
 form {
-    width: 700;
-}
-
-.number {
-    background-color: #5fcf80;
-    color: #fff;
-    height: 30px;
-    width: 30px;
-    display: inline-block;
-    font-size: 0.8em;
-    margin-right: 10px;
-    line-height: 30px;
-    text-align: center;
-    text-shadow: 0 1px 0 rgba(255,255,255,0.2);
-    border-radius: 50%;
-  }
-  .legend {
-      display: flex;
-      align-items: center;
-      margin: 20px 0px 20px 0px;
-      font-size: larger;
-      text-transform: uppercase;
-      font-weight: bolder;
-  }
-
-
-.label_input{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 100px;
-}
-
-
-input[type="text"],
-input[type="password"],
-input[type="date"],
-input[type="datetime"],
-input[type="email"],
-input[type="number"],
-input[type="search"],
-input[type="tel"],
-input[type="time"],
-input[type="url"],
-textarea,
-select {
-  background: rgba(255,255,255,0.1);
-  border: none;
-  font-size: 16px;
-  height: auto;
-  margin: 0;
-  text-align: center;
-  outline: 0;
-  padding: 15px;
-  width: 100%;
-  background-color: #e8eeef;
-  color: #1e272e;
-  box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
-  margin-bottom: 30px;
-}
-
-button{
-    padding: 10px 20px;
-    cursor: pointer;
-    color: #FFF;
-    background-color: #4bc970;
-    font-size: 18px;
-    text-align: center;
-    font-style: normal;
+    width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
     border-radius: 5px;
-    width: 30%;
-    border: 1px solid #3ac162;
-    border-width: 1px 1px 3px;
-    box-shadow: 0 -1px 0 rgba(255,255,255,0.1) inset;
-    margin-bottom: 10px;
-}
+    background-color: #f8f8f8;
+  }
+  
+  /* Style the fieldset and legend */
+  fieldset {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 15px;
+  }
+  
+  legend {
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #000000;
+  }
 
-.btn {
+  label {
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  select{
+    padding: 8px;
+    width: 100%;
+  }
+  
+  input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+  }
+  
+  /* Style the submit button */
+  .btn {
     display: flex;
-    justify-content: center;
-}
+    justify-content: flex-end;
+    align-items: center;
+  }
+  button {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  
