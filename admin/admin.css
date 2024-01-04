@@ -12,7 +12,7 @@ body {
 }
 
 .sidebar {
-    background-color: #333;
+    background-color: #a50e0e;
     color: white;
     padding: 20px;
     width: 200px;
@@ -220,6 +220,5 @@ main {
 }
 
 /* ... (remaining styles) ... */
-
 
 
