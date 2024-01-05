@@ -9,13 +9,17 @@ try {
     $connexion = new PDO("mysql:host=$serveur;dbname=$baseDeDonnees", $utilisateur, $motDePass);
 
     $depart = $_POST['departure_date'];
-    $destination = $_POST['destination'];
+    $destinationId = $_POST['destination'];
     $dateRetour = $_POST['return-date'];
     $nombre = $_POST['nbr_personne'];
 
-    $sql = $connexion->prepare("INSERT INTO ReservationsVols (DateDepart, DateRetour, NombrePassagers) VALUES (?, ?, ?)");
+    $destinationId = $connexion->query("SELECT DestinationID FROM Destinations WHERE NomDestination = '$destinationId'")->fetchColumn();
 
-    $sql->execute([$depart,$dateRetour,$nombre]);
+
+    $sql = $connexion->prepare("INSERT INTO ReservationsVols (DateDepart, DateRetour, DestinationId, NombrePassagers) VALUES (?, ?, ?, ?)");
+    $sql->execute([$depart, $dateRetour, $destinationId, $nombre]);
+
+    
 
     
     $connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
