@@ -6,40 +6,40 @@ body {
     margin: 0;
     padding: 0; 
 }
-.main {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
+
+
+.container {
+  display: flex;
+  flex-grow: 1; 
 }
 
 .sidebar {
-    background-color: #333;
-    color: white;
-    padding: 20px;
-    width: 200px;
-    box-sizing: border-box;
-    height: 100vh; 
-    position: fixed; 
+  background-color: #555;
+  color: white;
+  padding: 20px;
+  width: 200px;
+  box-sizing: border-box;
+  height: 100vh; 
+  position: fixed; 
 }
 
 .sidebar h2 {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 
 .sidebar a {
-    display: block;
-    padding: 10px;
-    text-decoration: none;
-    color: white;
-    font-weight: bold;
-    border-bottom: 1px solid #555;
-    cursor: pointer;
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  border-bottom: 1px solid #555;
+  cursor: pointer;
 }
 
 .sidebar a:hover {
-    background-color: #555;
+  background-color: #555;
 }
 
 .content {
