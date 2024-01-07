@@ -1,35 +1,18 @@
 <?php
-$serveur = "localhost"; 
-$utilisateur = "root"; 
-$motDePass = "root"; 
-$baseDeDonnees = "Projet"; 
+$serveur = "localhost"; // Adresse du serveur MySQL
+$utilisateur = "root"; // Nom d'utilisateur MySQL
+$motDePass = "root"; // Mot de passe MySQL
+$baseDeDonnees = "Projet"; // Nom de la base de données
 
 try {
-    
+    // Créer une connexion PDO
     $connexion = new PDO("mysql:host=$serveur;dbname=$baseDeDonnees", $utilisateur, $motDePass);
+    // echo "connexion ";
 
-    $depart = $_POST['departure_date'];
-    $destinationId = $_POST['destination'];
-    $dateRetour = $_POST['return-date'];
-    $nombre = $_POST['nbr_personne'];
-
-    $destinationId = $connexion->query("SELECT DestinationID FROM Destinations WHERE NomDestination = '$destinationId'")->fetchColumn();
-
-
-    $sql = $connexion->prepare("INSERT INTO ReservationsVols (DateDepart, DateRetour, DestinationId, NombrePassagers) VALUES (?, ?, ?, ?)");
-    $sql->execute([$depart, $dateRetour, $destinationId, $nombre]);
-
-    
-
-    
+    // Définir le mode d'erreur PDO à exception
     $connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-    echo "vols enregistre ";
 } catch (PDOException $e) {
-    echo "Erreur lors de  engistre vol : " . $e->getMessage();
-} finally {
-    $connexion = null;
+    die("Échec de la connexion : " . $e->getMessage());
 }
-?>
 
 
