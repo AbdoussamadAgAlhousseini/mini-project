@@ -1,7 +1,9 @@
 <?php
 session_start();
 require_once("connexion.php");
-
+// $_SESSION['destinationId'];
+// $_SESSION['destinationId'];
+$_SESSION['nomDestination'];
 function getDestinationInfo($destinationId)
 {
     global $connexion;
@@ -472,6 +474,8 @@ if ($destinationInfo !== false) {
         echo '        </div>';
         echo '        <div class="row">';
 
+        $ratingGiven = false;
+
         foreach ($destinations as $destination) {
             $destinationId = $destination['DestinationID'];
             $nomDestination = $destination['NomDestination'];
@@ -481,28 +485,18 @@ if ($destinationInfo !== false) {
 
             echo '            <div class="col-lg-4 col-md-6 mb-4">';
             echo '                <div class="package-item bg-white mb-2">';
-            echo '                    <img class="img-fluid" src="img/im1.jpg" alt="">'; // Assurez-vous d'ajuster le chemin de l'image
+            echo '                    <img class="img-fluid" src="' . $destination['Image'] . '" alt="">'; // Assurez-vous d'ajuster le chemin de l'image
             echo '                    <div class="p-4">';
             echo '                        <div class="d-flex justify-content-between mb-3">';
             echo '                            <small class="m-0"><i class="fa fa-map-marker-alt text-primary mr-2"></i>' . $nomDestination . '</small>';
-            // echo '                            <small class="m-0"><i class="fa fa-calendar-alt text-primary mr-2"></i>3 days</small>';
-            // echo '                            <small class="m-0"><i class="fa fa-user text-primary mr-2"></i>2 Person</small>';
-            //     echo ' <div class="rating" id="ratingStars">
-            //     <span class="star" onclick="rate(1)">&#9733;</span>
-            //     <span class="star" onclick="rate(2)">&#9733;</span>
-            //     <span class="star" onclick="rate(3)">&#9733;</span>
-            //     <span class="star" onclick="rate(4)">&#9733;</span>
-            //     <span class="star" onclick="rate(5)">&#9733;</span>
-            // </div>';
 
             echo '<div class="rating" data-destination-id="' . $destinationId . '">';
-            echo '<span class="star" onclick="rate(1)">&#9733;</span>';
-            echo '<span class="star" onclick="rate(2)">&#9733;</span>';
-            echo '<span class="star" onclick="rate(3)">&#9733;</span>';
-            echo '<span class="star" onclick="rate(4)">&#9733;</span>';
-            echo '<span class="star" onclick="rate(5)">&#9733;</span>';
+            echo '<span class="star" onclick="rate(1, ' . $destinationId . ')">&#9733;</span>';
+            echo '<span class="star" onclick="rate(2, ' . $destinationId . ')">&#9733;</span>';
+            echo '<span class="star" onclick="rate(3, ' . $destinationId . ')">&#9733;</span>';
+            echo '<span class="star" onclick="rate(4, ' . $destinationId . ')">&#9733;</span>';
+            echo '<span class="star" onclick="rate(5, ' . $destinationId . ')">&#9733;</span>';
             echo '</div>';
-
 
             echo '                        </div>';
             echo '                        <a class="h5 text-decoration-none" href="">' . $description . '</a>';
@@ -518,6 +512,11 @@ if ($destinationInfo !== false) {
             echo '                    </div>';
             echo '                </div>';
             echo '            </div>';
+
+            // Vérifier si une note a été attribuée
+            if ($ratingGiven) {
+                break; // Sortir de la boucle
+            }
         }
 
         echo '        </div>';
@@ -527,6 +526,8 @@ if ($destinationInfo !== false) {
         echo "Aucune destination trouvée.";
     }
     ?>
+
+
 
 
 
@@ -646,6 +647,8 @@ if ($destinationInfo !== false) {
                         echo '    <img class="img-fluid mx-auto" src="img/testimonial-4.jpg" style="width: 100px; height: 100px;">';
                         echo '    <div class="testimonial-text bg-white p-4 mt-n5">';
                         echo '        <p class="mt-5">' . $row['Commentaire'] . '</p>';
+
+                        echo '        <p class="mt-5">' . $_SESSION['nomDestination']  . '</p>';
                         echo '        <h5 class="text-truncate">' . $row['Nom'] . '</h5>';
                         echo '        <span>' . $row['DateCommentaire'] . '</span>';
                         echo '    </div>';
@@ -763,21 +766,40 @@ if ($destinationInfo !== false) {
     <script src="js/main.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script>
-        function rate(selectedStar) {
-            // Envoie du numéro de l'étoile au script PHP côté serveur
+    <!-- <script>
+        function rate(selectedStar, destinationId) {
+
             $.ajax({
                 type: "POST",
-                url: "script.php", // Remplacez script.php par le nom de votre script PHP
+                url: "script.php",
                 data: {
-                    starNumber: selectedStar
+                    starNumber: selectedStar,
+                    destinationId: <?php $destinationId ?>
+
                 },
                 success: function(response) {
-                    console.log(response); // Afficher la réponse du serveur (si nécessaire)
+                    console.log(response);
+                }
+            });
+        }
+    </script> -->
+
+    <script>
+        function rate(selectedStar, destinationId) {
+            $.ajax({
+                type: "POST",
+                url: "script.php",
+                data: {
+                    starNumber: selectedStar,
+                    destinationId: <?php echo $destinationId; ?> // Correction ici
+                },
+                success: function(response) {
+                    console.log(response);
                 }
             });
         }
     </script>
+
 </body>
 
 </html>

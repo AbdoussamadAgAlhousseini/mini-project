@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $message = "La date de départ doit être antérieure à la date de retour. Veuillez choisir des dates valides.";
     }
 
-    // Vérifier les réservations d'hôtel seulement si l'utilisateur a fourni des informations d'hôtel
+
     if (!empty($hotel) && !empty($dateDebut) && !empty($dateFin) && $nbrPassagers > 0) {
         if (strtotime($dateDebut) < strtotime($dateFin) || $dateFin === null) {
             $requeteDestinationID = $connexion->prepare("SELECT DestinationID FROM Destinations WHERE NomDestination = ?");
@@ -65,48 +65,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 
-// Vous pouvez utiliser la variable $message pour afficher des messages de succès ou d'erreur à l'utilisateur.
+
 ?>
 
-<?php
-// Paramètres de connexion à la base de données
-
-try {
-    // Créer une nouvelle connexion PDO
-    $dbh = new PDO('mysql:host=localhost;dbname=projet', 'root', 'root');
-
-    // Définir le mode d'erreur sur PDOException
-    $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-    // Récupérer les données du formulaire
-    $commentaire = $_POST['commentaire'];
-
-    if (!empty($commentaire)) {
-        $sql = "INSERT INTO Commentaires (idclient, DestinationID, DateCommentaire, Commentaire)
-        VALUES (:idclient, :DestinationID, NOW(), :commentaire)";
-
-        // Remplacez idclient et DestinationID par les valeurs appropriées
-        $idclient = $id; // Exemple, remplacez par la valeur réelle
-        // $DestinationID = $DestinationID; // Exemple, remplacez par la valeur réelle
-
-        $stmt = $dbh->prepare($sql);
-        $stmt->bindParam(':idclient', $idclient, PDO::PARAM_INT);
-        $stmt->bindParam(':DestinationID', $DestinationID, PDO::PARAM_INT);
-        $stmt->bindParam(':commentaire', $commentaire, PDO::PARAM_STR);
-
-        $stmt->execute();
-    }
-
-    // Exécuter la requête SQL d'insertion
-
-    // echo "Commentaire ajouté avec succès" . $commentaire;
-} catch (PDOException $e) {
-    echo "Erreur lors de l'ajout du commentaire : " . $e->getMessage();
-}
-
-// Fermer la connexion à la base de données
-$dbh = null;
-?>
 
 
 <?php
@@ -247,6 +208,68 @@ if ($destinationInfo !== false) {
         .star:empty {
             color: #ddd;
         }
+
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .profile-info {
+            background-color: #f0f0f0;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-picture {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .deconnexion a {
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        .deconnexion a:hover {
+            text-decoration: underline;
+        }
+
+        .inutilediv {
+            margin-top: 20px;
+            background-color: #ddd;
+            padding: 10px;
+        }
+
+        p {
+            margin: 0;
+            color: #555;
+        }
+
+        /* Optional: Add more styles as needed */
+
+
+        .btn-disabl {
+            opacity: 0.7;
+            /* Réduire l'opacité pour indiquer qu'il est désactivé */
+            cursor: not-allowed;
+            /* Changer le curseur pour indiquer qu'il est désactivé */
+            background-color: green;
+            /* Changer la couleur de fond */
+            color: #fff;
+            /* Changer la couleur du texte */
+            border: 1px solid #ccc;
+            /* Ajouter une bordure */
+        }
     </style>
 
 
@@ -261,10 +284,10 @@ if ($destinationInfo !== false) {
     <div class="container">
         <div class="profile-info">
             <img src="dv.svg" alt="Photo de profil" class="profile-picture">
-            <h1>Bienvenue, <?php echo $prenom . ' ' . $nom; ?>!</h1>
-            <a href="deconnexion.php">Se déconnecter</a>
+            <h1>Bienvenue, <?php echo $prenom . ' ' . $nom_utilisateur; ?>!</h1>
+            <div class="deconnexion"><a href="deconnexion.php">Se déconnecter</a></div>
             <div class="inutilediv">
-                <p>id: <?php echo $message, $date_retour, $datetest . 'je suis la' . strtotime($datetest); ?>
+                <p><?php echo $message, $date_retour, $datetest . '  ' . strtotime($datetest); ?>
 
 
                 </p>
@@ -285,13 +308,14 @@ if ($destinationInfo !== false) {
             <div class="container pb-5">
                 <div class="bg-light shadow" style="padding: 30px;">
                     <div class="row align-items-center" style="min-height: 60px;">
+                        <h3>reservation vol</h3>
 
                         <div class="col-md-10">
 
                             <div class="row">
                                 <div class="col-md-3">
-                                    <div class="mb-3 mb-md-0">
 
+                                    <div class="mb-3 mb-md-0">
                                         <?php
 
 
@@ -303,7 +327,7 @@ if ($destinationInfo !== false) {
                                             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 
-                                            $result = $pdo->query("SELECT NomDestination FROM Destinations");
+                                            $result = $pdo->query("SELECT NomDestination, Prix FROM Destinations");
 
 
                                             if ($result) {
@@ -311,7 +335,7 @@ if ($destinationInfo !== false) {
 
 
                                                 while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-                                                    echo '<option value="' . $row['NomDestination'] . '">' . $row['NomDestination'] . '</option>';
+                                                    echo '<option value="' . $row['NomDestination'] . '">' . $row['NomDestination'] . ' =>' . $row['Prix'] . '$' . '</option>';
                                                 }
 
                                                 echo '</select>';
@@ -341,7 +365,7 @@ if ($destinationInfo !== false) {
                                 </div>
                                 <div class="col-md-3">
                                     <div class="mb-3 mb-md-0">
-                                        <input type="number" id="adults" name="adults" min="1" class="form-control p-4 datetimepicker-input" required>
+                                        <input type="number" id="adults" name="adults" min="1" class="form-control p-4 datetimepicker-input" placeholder="nombre de personne" required>
                                     </div>
                                 </div>
                                 <!-- <button type="submit">Envoyer</button> -->
@@ -350,7 +374,7 @@ if ($destinationInfo !== false) {
 
                         </div>
                         <div class="col-md-2">
-                            <button class="btn btn-primary btn-block" type="submit" style="height: 47px; margin-top: -2px;">Submit</button>
+                            <button class="btn btn-primary btn-block" type="submit" style="height: 47px; margin-top: -2px;">Reserver</button>
                         </div>
 
                     </div>
@@ -368,9 +392,9 @@ if ($destinationInfo !== false) {
             <div class="container pb-5">
                 <div class="bg-light shadow" style="padding: 30px;">
                     <div class="row align-items-center" style="min-height: 60px;">
+                        <h3>reservation hotel</h3>
 
                         <div class="col-md-10">
-
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="mb-3 mb-md-0">
@@ -386,7 +410,7 @@ if ($destinationInfo !== false) {
                                             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 
-                                            $result = $pdo->query("SELECT NomDestination FROM Destinations");
+                                            $result = $pdo->query("SELECT NomDestination, Prix FROM Destinations");
 
 
                                             if ($result) {
@@ -394,7 +418,7 @@ if ($destinationInfo !== false) {
 
 
                                                 while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-                                                    echo '<option value="' . $row['NomDestination'] . '">' . $row['NomDestination'] . '</option>';
+                                                    echo '<option value="' . $row['NomDestination'] . '">' . $row['NomDestination'] . '=>' . $row['Prix'] . '</option>';
                                                 }
 
                                                 echo '</select>';
@@ -433,7 +457,7 @@ if ($destinationInfo !== false) {
 
                         </div>
                         <div class="col-md-2">
-                            <button class="btn btn-primary btn-block" type="submit" style="height: 47px; margin-top: -2px;">Submit</button>
+                            <button class="btn btn-primary btn-block" type="submit" style="height: 47px; margin-top: -2px;">Reserver</button>
                         </div>
 
                     </div>
@@ -493,9 +517,12 @@ if ($destinationInfo !== false) {
 
                 // echo ' <button id="btnSupprimerReservation" data-idreservation="123">Supprimer la réservation</button>';
                 // echo "<br><a href='supprimerReservation.php?id=" . $reservation["Id"] . "' class='btn btn-danger'>Supprimer cette réservation</a><br><br>";
-                echo "<p>Status : </p> <button  class='waiting'>en attente...</button>";
+                echo "<p>Status : </p> <button  class='waiting'>" . $reservation['Statut'] . "</button>";
 
                 echo "<hr>";
+                $_SESSION['destinationId'] = $reservation['DestinationID'];
+
+                // $_SESSION['destinationIds'][] = $destinationId;
             }
         } else {
             echo "<p class='no-reservation'>Aucune réservation de vols trouvée.</p>";
@@ -533,19 +560,31 @@ if ($destinationInfo !== false) {
                 }
 
                 echo $nomDestination;
+                $_SESSION['nomDestination'] = $nomDestination;
                 echo "<h6>Date de début</h6>";
                 echo $reservationHotel['DateDebut'];
                 echo "<h6>Date de fin</h6>";
                 echo $reservationHotel['DateFin'];
                 echo "<h6>Nombre de personnes</h6>";
                 echo $reservationHotel['NombrePersonnes'];
-                echo "<br><a href='supprimerReservation.php?id=" . $reservationHotel['ReservationHotelID'] . "' class='btn btn-danger'>Supprimer cette réservation</a><br><br>";
-                echo "<p>Status : </p> <button class='btn btn-disabled'>en attente...</button>";
-                echo "<hr>";
+
+                if ($reservationHotel['Statut'] == "Confirmée") {
+                    echo "<p>Status : </p> <button class='btn btn-disabl'>" . $reservationHotel['Statut'] . "</button>";
+                } else {
+
+                    echo "<br><a href='supprimerReservation.php?id=" . $reservationHotel['ReservationHotelID'] . "' class='btn btn-danger'>Supprimer cette réservation</a><br><br>";
+                    echo "<p>Status : </p> <button class='btn btn-disabled'>" . $reservationHotel['Statut'] . "...</button>";
+                    echo "<hr>";
+                }
+
+
+
+                // Récupération des informations de la réservation
+
             }
         } else {
             // echo "Aucune réservation d'hôtel trouvée.";
-            echo "<p class='no-reservation'>Aucune réservation de vols trouvée.</p>";
+            echo "<p class='no-reservation'>Aucune réservation d' hotel trouvée.</p>";
         }
     }
 
@@ -581,7 +620,7 @@ if ($destinationInfo !== false) {
     <div class="commentaire">
         <h5>Que pensez vous de nos services</h5>
         <form action="" method="post" enctype="multipart/form-data">
-            <input type="text" id="commentaire" name="commentaire" class="form-control" placeholder="Entrez votre commentaire..." required>
+            <input type="textarea" id="commentaire" name="commentaire" class="form-control" placeholder="Entrez votre commentaire..." required>
 
             <!-- <button type="button" class="btn btn-primary py-md-3 px-md-5 mt-2 style" onclick="ajouterCommentaire()">Ajouter un commentaire</button> -->
             <button type="submit" class="btn btn-primary py-md-3 px-md-5 mt-2 style">Ajouter un commentaire</button>
@@ -642,6 +681,88 @@ if ($destinationInfo !== false) {
                 });
             }
         </script> -->
+        <?php
+
+        try {
+
+            $dbh = new PDO('mysql:host=localhost;dbname=projet', 'root', 'root');
+
+            // Définir le mode d'erreur sur PDOException
+            $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            // Récupérer les données du formulaire
+            $commentaire = $_POST['commentaire'];
+
+
+
+            if (!empty($commentaire)) {
+                $sql = "INSERT INTO Commentaires (idclient, DestinationID, DateCommentaire, Commentaire)
+        VALUES (:idclient, :DestinationID, NOW(), :commentaire)";
+
+                // Remplacez idclient et DestinationID par les valeurs appropriées
+                $idclient = $id; // Exemple, remplacez par la valeur réelle
+                // $DestinationID = $DestinationID; // Exemple, remplacez par la valeur réelle
+                $DestinationID1 = $DestinationID;
+
+
+                $stmt = $dbh->prepare($sql);
+                $stmt->bindParam(':idclient', $idclient, PDO::PARAM_INT);
+                $stmt->bindParam(':DestinationID', $DestinationID1, PDO::PARAM_INT);
+                $stmt->bindParam(':commentaire', $commentaire, PDO::PARAM_STR);
+
+                $stmt->execute();
+            }
+
+            // Exécuter la requête SQL d'insertion
+
+            // echo "Commentaire ajouté avec succès" . $commentaire;
+        } catch (PDOException $e) {
+            echo "Erreur lors de l'ajout du commentaire : " . $e->getMessage();
+        }
+
+        // Fermer la connexion à la base de données
+        $dbh = null;
+        ?>
+
+
+
+        <?php
+        // // Connexion à la base de données (remplacez les valeurs par vos propres informations de connexion)
+        // $servername = "localhost";
+        // $username = "root";
+        // $password = "root";
+        // $dbname = "projet";
+
+        // $conn = new mysqli($servername, $username, $password, $dbname);
+
+        // // Vérifier la connexion
+        // if ($conn->connect_error) {
+        //     die("La connexion a échoué : " . $conn->connect_error);
+        // }
+
+        // // ID de destination pour lequel vous souhaitez afficher l'image
+        // $destinationId = 16; // Remplacez par l'ID de la destination que vous souhaitez
+
+        // // Requête SQL pour récupérer le chemin de l'image
+        // $sql = "SELECT Image FROM destinations WHERE DestinationID = $destinationId";
+        // $result = $conn->query($sql);
+
+        // // Vérifier s'il y a des résultats
+        // if ($result->num_rows > 0) {
+        //     // Récupérer le chemin de l'image depuis le résultat de la requête
+        //     $row = $result->fetch_assoc();
+        //     $imagePath = $row['Image'];
+
+        //     // Afficher l'image dans une balise img HTML
+        //     echo '<img src="' . $imagePath . '" alt="Image de la destination">';
+        // } else {
+        //     echo "Aucun résultat trouvé pour l'ID de destination fourni.";
+        // }
+
+        // // Fermer la connexion à la base de données
+        // $conn->close();
+        ?>
+
 
 
         <?php require_once('footer.php'); ?>

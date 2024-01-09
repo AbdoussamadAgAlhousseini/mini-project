@@ -35,9 +35,9 @@
                 <a href="./index.php" class="navbar-brand">
                     <h1 class="m-0 text-primary"><span class="text-dark">AL</span>MA</h1>
                 </a>
-                <div>
+                <!-- <div>
                     <p>test</p>
-                </div>
+                </div> -->
                 <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
                     <div class="navbar-nav ml-auto py-0">
                         <a href="index.php" class="nav-item nav-link active">Accueil</a>
