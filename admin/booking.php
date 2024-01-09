@@ -7,13 +7,13 @@
   <title>Document</title>
 </head>
 <body>
-<div class="sidebar">
-            <h2>ALMA</h2>
+        <div class="sidebar">
+            <a href="dashboard.html"><h2>ALMA</h2></a>
             <a href="dashboard.html">Dashboard</a>
             <a href="admin.php">Admin</a>
-            <a href="booking.html">Bookings</a>
-            <a href="flights.html">Flights</a>
-            <a href="hotels.html">Hotels</a>
+            <a href="booking.php">Bookings</a>
+            <a href="vols.php">Flights</a>
+            <a href="hotels.php">Hotels</a>
         </div>
 </body>
 </html>

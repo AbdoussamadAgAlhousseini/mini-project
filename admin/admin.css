@@ -119,3 +119,60 @@ form {
   button:hover {
     background-color: #45a049;
   }
+
+  /* General styling for cards */
+.card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 10px;
+  text-align: center;
+}
+
+/* Admin card styling */
+.admin {
+  background-color: #f0f0f0;
+}
+
+/* Booking card styling */
+.booking {
+  background-color: #d9f7e0;
+}
+
+/* Flights card styling */
+.flights {
+  background-color: #b3e0ff;
+}
+
+/* Hotels card styling */
+.hotels {
+  background-color: #ffd9b3;
+}
+
+/* Heading (h2) styling */
+h2 {
+  color: #333;
+}
+
+/* Paragraph (p) styling */
+p {
+  color: #666;
+}
+
+/* Link (a) styling */
+a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+/* Arrow character styling */
+.arrow {
+  font-size: 20px;
+  margin-left: 5px;
+}
+
+/* Hover effect for links */
+a:hover {
+  text-decoration: underline;
+}
+
