@@ -1,5 +1,41 @@
 <?php
 require_once("dbcon.php");
+
+    if (isset($_POST["ajouter"])) {
+        $nom = $_POST["nom_destination"];
+        $description = $_POST["description"];
+        $prix = $_POST["prix"];
+
+        if (!is_string($nom)) {
+            echo "Le nom de la destination doit être une chaîne de caractères.";
+            exit();
+        }
+
+        if (!is_string($description)) {
+            echo "La description doit être une chaîne de caractères.";
+            exit();
+        }
+
+        if (!is_numeric($prix)) {
+            echo "Le prix doit être un nombre.";
+            exit();
+        }
+
+        $sql = "INSERT INTO destinations (NomDestination, Description, Prix) VALUES (:nom, :description, :prix)";
+
+        $stmt = $connexion->prepare($sql);
+
+        $stmt->bindParam(":nom", $nom, PDO::PARAM_STR);
+        $stmt->bindParam(":description", $description, PDO::PARAM_STR);
+        $stmt->bindParam(":prix", $prix, PDO::PARAM_INT);
+
+        $stmt->execute();
+
+        if ($stmt->rowCount() === 0) {
+            echo "L'enregistrement n'a pas pu être ajouté.";
+        }
+        $stmt = null;
+    }
 ?>
 
 <!DOCTYPE html>
@@ -7,11 +43,13 @@ require_once("dbcon.php");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="flight.css">
+    <link rel="stylesheet" href="admin.css">
+    <title>Document</title>
 </head>
 <body>
+
     <div class="container">
+            
         <div class="sidebar">
             <h2>ALMA</h2>
             <a href="dashboard.html">Dashboard</a>
@@ -21,71 +59,21 @@ require_once("dbcon.php");
             <a href="hotels.html">Hotels</a>
         </div>
 
-        <div class="content">
-            <header>
-                <h1>Welcome to the Admin Dashboard</h1>
-            </header>
-            <main class="main">
-                <form action="dbcon.php" method="post">
-                    <fieldset>
-                    <legend>flights manager</legend>
-                  
-                    <label for="departure_date">Departure Date :</label>
-                    <input type="date" id="departure_date" name="departure_date" required><br>
-                    
-                    
-                      
-                        
-                                 
-                    <label for="return-date">return Date:</label>
-                    <input type="date" id="return-date" name="return-date" required><br>
-
-                    <label for="nombre_de_personne">nombre de personne</label>
-                    <input type="number" name="nbr_personne" id="" min="1">
-
-
-                                    
-                    
-                </fieldset>
-                  </form>
-
-                  <form action="admin.php" method="POST">
-                    <label for="destination">Destination :</label>
-                    <select name="destination" id="">
-                        
-                        <option value="">
-                        </option>
-                        
-                    </select>
-                    <div class="btn"><button name="btn" type="submit">Add Flight</button></div>
-                  
-                </form>
-
-                <form action="dbcon.php" method="post">
-                    <fieldset>
-                    <legend>hotels manager</legend>
-                  
-                    <label for="date_reserv">Date de reservation :</label>
-                    <input type="date" id="date_reserv" name="date_reserv" required><br>
-                    
-                     
-                    <label for="reserve_fin">fin de reservation</label>
-                    <input type="date" id="reserve_fin" name="reserve_fin" required><br>
-
-                    <label for="nombre_de_personne">nombre de personne</label>
-                    <input type="number" name="nbr_personne" id="" min="1">
-
-                    <div class="btn"><button type="submit">Add </button></div>
-
-                </fieldset>
-                  </form>
-                  
-            </main>
-        </div>
-    </div>
-
-    <script src="admin.js">
-      
-    </script>
+        <form action="" method="post"> <!-- Changed action to admin.php -->
+          <div class="form-group">
+            <label for="nom_destination">Nom de destination</label>
+            <input type="text" name="nom_destination" id="nom_destination" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label for="description">Description</label>
+            <input type="text" name="description" id="">
+          </div>
+          <div class="form-group">
+            <label for="prix">Prix</label>
+            <input type="number" name="prix" id="prix" class="form-control" />
+          </div>
+          <button type="submit" name="ajouter" class="btn btn-primary" >Ajouter</button> <!-- Added name attribute to submit button -->
+        </form>
+        
 </body>
 </html>
