@@ -2,7 +2,7 @@
 $serveur = "localhost"; // Adresse du serveur MySQL
 $utilisateur = "root"; // Nom d'utilisateur MySQL
 $motDePass = "root"; // Mot de passe MySQL
-$baseDeDonnees = "Projet"; // Nom de la base de données
+$baseDeDonnees = "projet"; // Nom de la base de données
 
 try {
     // Créer une connexion PDO
