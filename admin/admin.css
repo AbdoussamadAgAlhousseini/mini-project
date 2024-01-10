@@ -176,3 +176,79 @@ a:hover {
   text-decoration: underline;
 }
 
+
+    /* General styling for the page */
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+    }
+
+    .main {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Styling for the Flight Table section */
+    #flight-table {
+        margin-top: 20px;
+    }
+
+    h2 {
+        color: #333;
+    }
+
+    /* Styling for the table */
+    .styled-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 25px 0;
+        font-size: 18px;
+        text-align: left;
+    }
+
+    .styled-table th,
+    .styled-table td {
+        padding: 12px 15px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .styled-table th {
+        background-color: #f2f2f2;
+    }
+
+    /* Styling for table rows */
+    .styled-table tbody tr:hover {
+        background-color: #f5f5f5;
+    }
+
+    /* Styling for table data */
+    .styled-table td {
+        color: #666;
+    }
+
+    /* Status column specific styling */
+    .styled-table .status {
+        color: #fff;
+        font-weight: bold;
+        padding: 8px 12px;
+        border-radius: 5px;
+    }
+
+    .styled-table .status.pending {
+        background-color: #ffcc00; /* yellow */
+    }
+
+    .styled-table .status.completed {
+        background-color: #4caf50; /* green */
+    }
+
+    .styled-table .status.canceled {
+        background-color: #ff6666; /* red */
+    }
+
+
