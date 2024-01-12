@@ -171,11 +171,11 @@ if ($destinationInfo !== false) {
                 </button>
                 <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
                     <div class="navbar-nav ml-auto py-0">
-                        <a href="index.html" class="nav-item nav-link active">Accueil</a>
-                        <a href="about.html" class="nav-item nav-link">A propos</a>
-                        <a href="service.html" class="nav-item nav-link">Services</a>
+                        <a href="index.php" class="nav-item nav-link active">Accueil</a>
+                        <a href="about.php" class="nav-item nav-link">A propos</a>
+                        <a href="service.php" class="nav-item nav-link">Services</a>
 
-                        <a href="contact.html" class="nav-item nav-link">Contact</a>
+                        <a href="contact.php" class="nav-item nav-link">Contact</a>
 
                         <a href="login.php" class="nav-item nav-link"><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
                                 <path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z" />
@@ -197,11 +197,11 @@ if ($destinationInfo !== false) {
                     <img class="w-100" src="img/carousel-1.jpg" alt="Image">
                     <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                         <div class="p-3" style="max-width: 900px;">
-                            <h4 class="text-white text-uppercase mb-md-3">Tours & Travel</h4>
-                            <h1 class="display-3 text-white mb-md-4">Let's Discover The World Together</h1>
+                            <h4 class="text-white text-uppercase mb-md-3">Tours & Voyages</h4>
+                            <h1 class="display-3 text-white mb-md-4">Découvrez Le Monde Avec nous</h1>
                             <a href="reservation.php" class="btn btn-primary py-md-3 px-md-5 mt-2">
 
-                                Book Now
+                                Reservez Maintenant
                             </a>
                         </div>
                     </div>
@@ -210,9 +210,9 @@ if ($destinationInfo !== false) {
                     <img class="w-100" src="img/carousel-2.jpg" alt="Image">
                     <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                         <div class="p-3" style="max-width: 900px;">
-                            <h4 class="text-white text-uppercase mb-md-3">Tours & Travel</h4>
-                            <h1 class="display-3 text-white mb-md-4">Discover Amazing Places With Us</h1>
-                            <a href="" class="btn btn-primary py-md-3 px-md-5 mt-2">Book Now</a>
+                            <h4 class="text-white text-uppercase mb-md-3">Tours & Voyages</h4>
+                            <h1 class="display-3 text-white mb-md-4">Les Endroits Incroyablements Beaux</h1>
+                            <a href="" class="btn btn-primary py-md-3 px-md-5 mt-2">Reserver Maintenant</a>
                         </div>
                     </div>
                 </div>
@@ -240,7 +240,7 @@ if ($destinationInfo !== false) {
                 </div>
                 <div class="col-lg-6 pt-5 pb-lg-5">
                     <div class="about-text bg-white p-4 p-lg-5 my-lg-5">
-                        <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">About Us</h6>
+                        <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">A Propos de Nous</h6>
                         <h1 class="mb-3">We Provide Best Tour Packages In Your Budget</h1>
                         <p>Dolores lorem lorem ipsum sit et ipsum. Sadip sea amet diam dolore sed et. Sit rebum labore
                             sit sit ut vero no sit. Et elitr stet dolor sed sit et sed ipsum et kasd ut. Erat duo eos et
@@ -253,7 +253,7 @@ if ($destinationInfo !== false) {
                                 <img class="img-fluid" src="img/about-2.jpg" alt="">
                             </div>
                         </div>
-                        <a href="" class="btn btn-primary mt-1">Book Now</a>
+                        <a href="" class="btn btn-primary mt-1">Reservez</a>
                     </div>
                 </div>
             </div>
@@ -272,7 +272,7 @@ if ($destinationInfo !== false) {
                             <i class="fa fa-2x fa-money-check-alt text-white"></i>
                         </div>
                         <div class="d-flex flex-column">
-                            <h5 class="">Competitive Pricing</h5>
+                            <h5 class="">Des prix competitives </h5>
                             <p class="m-0">Magna sit magna dolor duo dolor labore rebum amet elitr est diam sea</p>
                         </div>
                     </div>
@@ -283,7 +283,7 @@ if ($destinationInfo !== false) {
                             <i class="fa fa-2x fa-award text-white"></i>
                         </div>
                         <div class="d-flex flex-column">
-                            <h5 class="">Best Services</h5>
+                            <h5 class="">Les Meilleurs Services</h5>
                             <p class="m-0">Magna sit magna dolor duo dolor labore rebum amet elitr est diam sea</p>
                         </div>
                     </div>
@@ -294,7 +294,7 @@ if ($destinationInfo !== false) {
                             <i class="fa fa-2x fa-globe text-white"></i>
                         </div>
                         <div class="d-flex flex-column">
-                            <h5 class="">Worldwide Coverage</h5>
+                            <h5 class="">Nous Couvrons Les Meilleures Destinations</h5>
                             <p class="m-0">Magna sit magna dolor duo dolor labore rebum amet elitr est diam sea</p>
                         </div>
                     </div>
@@ -309,16 +309,16 @@ if ($destinationInfo !== false) {
     <div class="container-fluid py-5">
         <div class="container pt-5 pb-3">
             <div class="text-center mb-3 pb-3">
-                <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">Destination</h6>
-                <h1>Explore Top Destination</h1>
+                <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">Destinations</h6>
+                <h1>Explorez Le Top Destination</h1>
             </div>
             <div class="row">
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="destination-item position-relative overflow-hidden mb-2">
-                        <img class="img-fluid taille" src="img/new york.jpg" alt="">
+                        <img class="img-fluid taille" src="img/mec.jpg" alt="">
                         <a class="destination-overlay text-white text-decoration-none" href="">
-                            <h5 class="text-white">United States</h5>
-                            <span>100 Cities</span>
+                            <h5 class="text-white">La Mecque</h5>
+                            <span>10000 DA</span>
                         </a>
                     </div>
                 </div>
@@ -326,8 +326,8 @@ if ($destinationInfo !== false) {
                     <div class="destination-item position-relative overflow-hidden mb-2">
                         <img class="img-fluid taille" src="img/destination-2.jpg" alt="">
                         <a class="destination-overlay text-white text-decoration-none" href="">
-                            <h5 class="text-white">United Kingdom</h5>
-                            <span>100 Cities</span>
+                            <h5 class="text-white">France</h5>
+                            <span>1000 DA</span>
                         </a>
                     </div>
                 </div>
@@ -335,8 +335,8 @@ if ($destinationInfo !== false) {
                     <div class="destination-item position-relative overflow-hidden mb-2">
                         <img class="img-fluid taille" src="img/destination-3.jpg" alt="">
                         <a class="destination-overlay text-white text-decoration-none" href="">
-                            <h5 class="text-white">Australia</h5>
-                            <span>100 Cities</span>
+                            <h5 class="text-white">Australie</h5>
+                            <span>1000</span>
                         </a>
                     </div>
                 </div>
@@ -344,7 +344,7 @@ if ($destinationInfo !== false) {
                     <div class="destination-item position-relative overflow-hidden mb-2">
                         <img class="img-fluid taille" src="img/inde.jpg" alt="">
                         <a class="destination-overlay text-white text-decoration-none" href="">
-                            <h5 class="text-white">India</h5>
+                            <h5 class="text-white">Inde</h5>
                             <span>100 Cities</span>
                         </a>
                     </div>
@@ -353,8 +353,8 @@ if ($destinationInfo !== false) {
                     <div class="destination-item position-relative overflow-hidden mb-2">
                         <img class="img-fluid taille" src="img/destination-5.jpg" alt="">
                         <a class="destination-overlay text-white text-decoration-none" href="">
-                            <h5 class="text-white">South Africa</h5>
-                            <span>100 Cities</span>
+                            <h5 class="text-white">Afrique du sud</h5>
+                            <span>1000</span>
                         </a>
                     </div>
                 </div>
@@ -362,8 +362,8 @@ if ($destinationInfo !== false) {
                     <div class="destination-item position-relative overflow-hidden mb-2">
                         <img class="img-fluid taille" src="img/indonesie.jpg" alt="">
                         <a class="destination-overlay text-white text-decoration-none" href="">
-                            <h5 class="text-white">Indonesia</h5>
-                            <span>100 Cities</span>
+                            <h5 class="text-white">Indonesie</h5>
+                            <span>1000</span>
                         </a>
                     </div>
                 </div>
@@ -378,29 +378,34 @@ if ($destinationInfo !== false) {
         <div class="container pt-5 pb-3">
             <div class="text-center mb-3 pb-3">
                 <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">Services</h6>
-                <h1>Tours & Travel Services</h1>
+                <h1>Tours & Voyages Services</h1>
             </div>
             <div class="row">
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="service-item bg-white text-center mb-2 py-5 px-4">
                         <i class="fa fa-2x fa-route mx-auto mb-4"></i>
-                        <h5 class="mb-2">Travel Guide</h5>
+                        <h5 class="mb-2">Guide de voyage</h5>
                         <p class="m-0">Justo sit justo eos amet tempor amet clita amet ipsum eos elitr. Amet lorem est
                             amet labore</p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="service-item bg-white text-center mb-2 py-5 px-4">
-                        <i class="fa fa-2x fa-ticket-alt mx-auto mb-4"></i>
-                        <h5 class="mb-2">Ticket Booking</h5>
+                        <a href="profil.php">
+                            <i class="fa fa-2x fa-ticket-alt mx-auto mb-4"></i>
+
+                            <h5 class="mb-2">Reservez un vol</h5>
+                        </a>
                         <p class="m-0">Justo sit justo eos amet tempor amet clita amet ipsum eos elitr. Amet lorem est
                             amet labore</p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="service-item bg-white text-center mb-2 py-5 px-4">
-                        <i class="fa fa-2x fa-hotel mx-auto mb-4"></i>
-                        <h5 class="mb-2">Hotel Booking</h5>
+                        <a href="profil.php">
+                            <i class="fa fa-2x fa-hotel mx-auto mb-4"></i>
+                            <h5 class="mb-2">Reservez un Hotel</h5>
+                        </a>
                         <p class="m-0">Justo sit justo eos amet tempor amet clita amet ipsum eos elitr. Amet lorem est
                             amet labore</p>
                     </div>
@@ -540,8 +545,8 @@ if ($destinationInfo !== false) {
             <div class="row align-items-center">
                 <div class="col-lg-7 mb-5 mb-lg-0">
                     <div class="mb-4">
-                        <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">Mega Offer</h6>
-                        <h1 class="text-white"><span class="text-primary">30% OFF</span> For Honeymoon</h1>
+                        <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">Mega Offre</h6>
+                        <h1 class="text-white"><span class="text-primary">-30%</span> Pour les lune de miel</h1>
                     </div>
                     <p class="text-white">Invidunt lorem justo sanctus clita. Erat lorem labore ea, justo dolor lorem
                         ipsum ut sed eos,
@@ -569,13 +574,13 @@ if ($destinationInfo !== false) {
         <div class="container pt-5 pb-3 ">
             <div class="text-center mb-3 pb-3">
                 <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">Guides</h6>
-                <h1>Our Travel Guides</h1>
+                <h1>Nos Guides</h1>
             </div>
             <div class="row equipe">
                 <div class="col-lg-3 col-md-2 col-sm-3 pb-2">
                     <div class="team-item bg-white mb-2">
                         <div class="team-img position-relative overflow-hidden">
-                            <img class="img-fluid w-100" src="img/team-1.jpg" alt="">
+                            <img class="img-fluid w-100" src="img/team-2.jpg" alt="">
                             <div class="team-social">
                                 <a class="btn btn-outline-primary btn-square" href=""><i class="fab fa-whatsapp"></i></a>
                                 <a class="btn btn-outline-primary btn-square" href=""><i class="fab fa-facebook-f"></i></a>
@@ -605,6 +610,24 @@ if ($destinationInfo !== false) {
                         </div>
                     </div>
                 </div>
+
+
+                <div class="col-lg-3 col-md-2 col-sm-3 pb-2">
+                    <div class="team-item bg-white mb-2">
+                        <div class="team-img position-relative overflow-hidden">
+                            <img class="img-fluid w-100" src="img/team-4.jpg" alt="">
+                            <div class="team-social">
+                                <a class="btn btn-outline-primary btn-square" href=""><i class="fab fa-whatsapp"></i></a>
+                                <a class="btn btn-outline-primary btn-square" href=""><i class="fab fa-facebook-f"></i></a>
+
+                            </div>
+                        </div>
+                        <div class="text-center py-2">
+                            <h5 class="text-truncate">Remy</h5>
+                            <p class="m-0">Designation</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -615,8 +638,8 @@ if ($destinationInfo !== false) {
     <div class="container-fluid py-5">
         <div class="container py-5">
             <div class="text-center mb-3 pb-3">
-                <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">Testimonial</h6>
-                <h1>What Say Our Clients</h1>
+                <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">Temoignage</h6>
+                <h1>Que Dit Notre clientèle</h1>
             </div>
             <div class="owl-carousel testimonial-carousel">
                 <?php
@@ -673,97 +696,7 @@ if ($destinationInfo !== false) {
 
 
     <!-- Footer Start -->
-    <div class="container-fluid bg-dark text-white-50 py-5 px-sm-3 px-lg-5" style="margin-top: 90px;">
-        <div class="row pt-5">
-            <div class="col-lg-3 col-md-6 mb-5">
-                <a href="" class="navbar-brand">
-                    <h1 class="text-primary"><span class="text-white">AL</span>MA</h1>
-                </a>
-                <p>Sed ipsum clita tempor ipsum ipsum amet sit ipsum lorem amet labore rebum lorem ipsum dolor. No sed
-                    vero lorem dolor dolor</p>
-                <h6 class="text-white text-uppercase mt-4 mb-3" style="letter-spacing: 5px;">Follow Us</h6>
-                <div class="d-flex justify-content-start">
-
-                    <a class="btn btn-outline-primary btn-square mr-2" href="https://www.facebook.com/NOMDEVOTREPAG/facebook.com/messages/"><i class="fab fa-facebook-f"></i></a>
-                    <a class="btn btn-outline-primary btn-square mr-2" href="https://wa.me/+22391427701?text=Bonjour"><i class="fab fa-whatsapp"></i></a>
-
-
-
-
-
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 mb-5">
-                <h5 class="text-white text-uppercase mb-4" style="letter-spacing: 5px;">Nos Services</h5>
-                <div class="d-flex flex-column justify-content-start">
-                    <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>A propos</a>
-                    <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Destinations</a>
-                    <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Services</a>
-                    <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Packages</a>
-                    <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Guides</a>
-                    <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Témoignages</a>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 mb-5">
-                <h5 class="text-white text-uppercase mb-4" style="letter-spacing: 5px;">Informations utiles</h5>
-                <div class="d-flex flex-column justify-content-start">
-                    <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>About</a>
-                    <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Destination</a>
-                    <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Services</a>
-                    <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Packages</a>
-                    <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Guides</a>
-                    <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Testimonial</a>
-
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 mb-5">
-                <h5 class="text-white text-uppercase mb-4" style="letter-spacing: 5px;">Contactez-nous</h5>
-                <p><i class="fa fa-map-marker-alt mr-2"></i>ouled fayet plateau</p>
-                <p><i class="fa fa-phone-alt mr-2"></i>+213771836015</p>
-                <p><i class="fa fa-envelope mr-2"></i>abdoussamad1952@gmail.com</p>
-                <h6 class="text-white text-uppercase mt-4 mb-3" style="letter-spacing: 5px;">Newsletter</h6>
-                <div class="w-100">
-                    <div class="input-group">
-                        <input type="text" class="form-control border-light" style="padding: 25px;" placeholder="Your Email">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary px-3">Sign Up</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="container-fluid bg-dark text-white border-top py-4 px-sm-3 px-md-5" style="border-color: rgba(256, 256, 256, .1) !important;">
-        <div class="row">
-            <div class="col-lg-6 text-center text-md-left mb-3 mb-md-0">
-                <p class="m-0 text-white-50">Copyright &copy; <a href="#">Mini-project</a>. All Rights Reserved.</a>
-                </p>
-            </div>
-
-        </div>
-    </div>
-    <!-- Footer End -->
-
-
-    <!-- Back to Top -->
-    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="fa fa-angle-double-up"></i></a>
-
-
-    <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-    <script src="lib/tempusdominus/js/moment.min.js"></script>
-    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
-    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
-
-    <!-- Contact Javascript File -->
-    <script src="mail/jqBootstrapValidation.min.js"></script>
-    <script src="mail/contact.js"></script>
-
-    <!-- Template Javascript -->
-    <script src="js/main.js"></script>
+    <?php require_once('footer.php') ?>
 
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <!-- <script>

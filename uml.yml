@@ -1,0 +1,100 @@
+
+@startuml
+!theme materia-outline
+class Admin {
+  - adminId : int
+  - nomAdmin : string
+  - prenomAdmin : string
+ 
+  - email : string
+  - motDePasse : string
+}
+
+class Client {
+  - idClient : int
+  - nom : string
+  - prenom : string
+  - email : string
+  - tel : string
+  - motDePasse : string
+}
+
+class Destination {
+  - destinationId : int
+  - nomDestination : string
+  - description : string
+  - prix : int
+  - image : string
+  
+}
+
+class ReservationsVol {
+  - reservationVolId : int
+  - idClient : int
+  - destinationId : int
+  - dateDepart : datetime
+  - dateRetour : datetime
+ 
+  - nombrePassagers : int
+  - status : string
+}
+
+class ReservationsHotel {
+  - reservationHotelId : int
+  - idClient : int
+  - destinationId : int
+  - dateDepart : datetime
+  - dateRetour : datetime
+ 
+  - nombrePersonnes : int
+  - status : string
+}
+
+
+class Commentaire {
+  - commentaireId : int
+  - client_id : int
+  - destinationId : int
+  - dateCommentaire
+  - commentaire : string
+  
+}
+
+
+class Notation {
+  - notationId : int
+  - client_id : int
+  - destinationId : int
+  
+  - note : int
+  
+}
+
+
+
+Admin "1" -- "n" ReservationsHotel : gerer
+Admin "1" -- "n" ReservationsVol : gerer
+Admin "1" -- "n" Destination : ajouter
+
+
+Client "1" -- "n" ReservationsHotel : reserver
+Client "1" -- "n" ReservationsVol : reserver
+
+Destination "1" -- "n" ReservationsVol : a
+Destination "1" -- "n" ReservationsHotel : avoir
+
+
+Commentaire "0" -- "n" ReservationsVol : avoir
+Commentaire "0" -- "n" ReservationsHotel : avoir
+
+
+Notation "0" -- "n" ReservationsVol : avoir
+Notation "0" -- "n" ReservationsHotel : avoir
+
+Client "1" -- "n" Commentaire : commenter
+Client "1" -- "n" Notation : commenter
+
+
+
+
+@enduml

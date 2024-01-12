@@ -38,6 +38,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Récupérer les valeurs du formulaire
     $email = $_POST['email'];
     $motDePasse = $_POST['mot_de_passe'];
+    // if ($email = "admin@gmail.com" and $motDePasse = "admin12345") {
+    //     header("Location: ./admin/dashboard.html");
+    // }
+    if ($email == "admin@gmail.com" && $motDePasse == "12345678") {
+
+        header("Location: ./admin/dashboard.html");
+    }
 
     // Préparer la requête SQL (assurez-vous d'ajuster la structure de votre table)
     $requete = $connexion->prepare("SELECT * FROM Clients WHERE email = ?");
@@ -49,6 +56,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $utilisateur = $requete->fetch(PDO::FETCH_ASSOC);
 
     // Vérifier si l'utilisateur existe et le mot de passe est correct
+
+
     if ($utilisateur && password_verify($motDePasse, $utilisateur['mot_de_passe'])) {
         // Enregistrez l'ID de l'utilisateur dans la session
         $_SESSION['idclient'] = $utilisateur['idclient'];
@@ -111,69 +120,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <body>
     <!-- Topbar Start -->
-    <div class="container-fluid bg-light pt-3 d-none d-lg-block">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 text-center text-lg-left mb-2 mb-lg-0">
-                    <div class="d-inline-flex align-items-center">
-                        <p><i class="fa fa-envelope mr-2"></i><a href="mailto:abdoussamad1952@gmail.com?subject=Réservation&body=">abdoussamad1952@gmail.com</a>
-                        </p>
-                        <p class="text-body px-3">|</p>
-                        <p><i class="fa fa-phone-alt mr-2"></i>+213771836015</p>
-                    </div>
-                </div>
-                <div class="col-lg-6 text-center text-lg-right">
-                    <div class="d-inline-flex align-items-center">
-                        <a class="text-primary px-3" href="https://www.facebook.com/Abdoussamad/facebook.com/messages/">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a class="text-primary px-3" href="https://wa.me/+22391427701?text=Bonjour">
-                            <i class="fab fa-whatsapp"></i>
-                        </a>
+    <?php require_once("header.php") ?>
 
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Topbar End -->
-
-
-
-
-    <!-- Navbar Start -->
-    <div class="container-fluid position-relative nav-bar p-0">
-        <div class="container-lg position-relative p-0 px-lg-3" style="z-index: 9;">
-            <nav class="navbar navbar-expand-lg bg-light navbar-light shadow-lg py-3 py-lg-0 pl-3 pl-lg-5">
-                <a href="" class="navbar-brand">
-                    <h1 class="m-0 text-primary"><span class="text-dark">AL</span>MA</h1>
-                </a>
-                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
-                    <div class="navbar-nav ml-auto py-0">
-                        <a href="index.php" class="nav-item nav-link active">Accueil</a>
-                        <!-- <a href="about.html" class="nav-item nav-link">A propos</a>
-                        <a href="service.html" class="nav-item nav-link">Services</a>
-                        <a href="login.html" class="nav-item nav-link">Login</a> -->
-                        <!-- <a href="package.html" class="nav-item nav-link">Tour Packages</a>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
-                            <div class="dropdown-menu border-0 rounded-0 m-0">
-                                <a href="blog.html" class="dropdown-item">Blog Grid</a>
-                                <a href="single.html" class="dropdown-item">Blog Detail</a>
-                                <a href="destination.html" class="dropdown-item">Destination</a>
-                                <a href="guide.html" class="dropdown-item">Travel Guides</a>
-                                <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                            </div>
-                        </div> -->
-                        <a href="contact.html" class="nav-item nav-link">Contact</a>
-                    </div>
-                </div>
-            </nav>
-        </div>
-    </div>
     <div class=" style">
         <div class="card border-0">
             <div class="card-header bg-primary text-center p-4">
