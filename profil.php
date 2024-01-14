@@ -513,16 +513,51 @@ if ($destinationInfo !== false) {
                 echo $reservation['DateRetour'];
                 echo "<h6>Nombre de passagers</h6>";
                 echo $reservation['NombrePassagers'];
-                echo "<br><a href='supprimeReserveration.php?id=" . $reservation['ReservationVolID'] . "' class='btn btn-danger'>Supprimer cette réservation</a><br><br>";
 
-                // echo ' <button id="btnSupprimerReservation" data-idreservation="123">Supprimer la réservation</button>';
-                // echo "<br><a href='supprimerReservation.php?id=" . $reservation["Id"] . "' class='btn btn-danger'>Supprimer cette réservation</a><br><br>";
-                echo "<p>Status : </p> <button  class='waiting'>" . $reservation['Statut'] . "</button>";
+                if ($reservation['Statut'] !== "En Attente") {
+                    echo "<p>Status : </p> <button class='btn btn-disabl'>" . $reservation['Statut'] . "</button>";
+                } else {
+                    echo "<p>Status : </p> <button  class='waiting'>" . $reservation['Statut'] . "</button>";
+
+                    echo "<br><a href='supprimeReserveration.php?id=" . $reservation['ReservationVolID'] . "' class='btn btn-danger'>Supprimer cette réservation</a><br><br>";
+
+
+                    // require('./fpdf/fpdf.php');
+
+                    // // Récupérer les informations de la session
+
+                    // $dateDebut = $reservation['DateDepart'];
+                    // $dateFin = $reservation['DateRetour'];
+                    // $nombrePersonnes = $reservation['NombrePassagers'];
+
+                    // // Créer une instance de la classe FPDF
+                    // $pdf = new FPDF();
+                    // $pdf->AddPage();
+
+                    // // Ajouter les informations au PDF
+                    // $pdf->SetFont('Arial', 'B', 16);
+                    // $pdf->Cell(40, 10, 'Nom de la destination: ' . $nomDestination);
+
+                    // $pdf->SetFont('Arial', 'I', 12);
+                    // $pdf->Ln(10);
+                    // $pdf->Cell(40, 10, 'Date de début: ' . $dateDebut);
+                    // $pdf->Ln(8);
+                    // $pdf->Cell(40, 10, 'Date de fin: ' . $dateFin);
+                    // $pdf->Ln(8);
+                    // $pdf->Cell(40, 10, 'Nombre de personnes: ' . $nombrePersonnes);
+
+                    // // Nom du fichier PDF à télécharger
+                    // $filename = 'reservation_vol.pdf';
+
+                    // // Sauvegarder le PDF sur le serveur
+                    // $pdf->Output($filename, 'F');
+
+                    // // Lien de téléchargement
+                    // echo " <button class='btn btn-disabl' > <a href='$filename' download>Télécharger le PDF</a> </button>";
+                }
 
                 echo "<hr>";
                 $_SESSION['destinationId'] = $reservation['DestinationID'];
-
-                // $_SESSION['destinationIds'][] = $destinationId;
             }
         } else {
             echo "<p class='no-reservation'>Aucune réservation de vols trouvée.</p>";
@@ -568,9 +603,49 @@ if ($destinationInfo !== false) {
                 echo "<h6>Nombre de personnes</h6>";
                 echo $reservationHotel['NombrePersonnes'];
 
-                if ($reservationHotel['Statut'] == "Confirmée") {
+
+
+                if ($reservationHotel['Statut'] !== "En Attente") {
                     echo "<p>Status : </p> <button class='btn btn-disabl'>" . $reservationHotel['Statut'] . "</button>";
+
+
+                    // require('./fpdf/fpdf.php');
+
+                    // // Récupérer les informations de la session
+                    // $nomDestination = $_SESSION['nomDestination'];
+                    // $dateDebut = $reservationHotel['DateDebut'];
+                    // $dateFin = $reservationHotel['DateFin'];
+                    // $nombrePersonnes = $reservationHotel['NombrePersonnes'];
+
+                    // // Créer une instance de la classe FPDF
+                    // $pdf = new FPDF();
+                    // $pdf->AddPage();
+
+                    // // Ajouter les informations au PDF
+                    // $pdf->SetFont('Arial', 'B', 16);
+                    // $pdf->Cell(40, 10, 'Nom de la destination: ' . $nomDestination);
+
+                    // $pdf->SetFont('Arial', 'I', 12);
+                    // $pdf->Ln(10);
+                    // $pdf->Cell(40, 10, 'Date de début: ' . $dateDebut);
+                    // $pdf->Ln(8);
+                    // $pdf->Cell(40, 10, 'Date de fin: ' . $dateFin);
+                    // $pdf->Ln(8);
+                    // $pdf->Cell(40, 10, 'Nombre de personnes: ' . $nombrePersonnes);
+
+                    // // Nom du fichier PDF à télécharger
+                    // $filename = 'reservation_hotel.pdf';
+
+                    // // Sauvegarder le PDF sur le serveur
+                    // $pdf->Output($filename, 'F');
+
+                    // // Lien de téléchargement
+                    // echo " <button class='btn btn-disabl' > <a href='$filename' download>Télécharger le PDF</a> </button>";
                 } else {
+
+
+
+
 
                     echo "<br><a href='supprimerReservation.php?id=" . $reservationHotel['ReservationHotelID'] . "' class='btn btn-danger'>Supprimer cette réservation</a><br><br>";
                     echo "<p>Status : </p> <button class='btn btn-disabled'>" . $reservationHotel['Statut'] . "...</button>";
@@ -658,29 +733,7 @@ if ($destinationInfo !== false) {
 
 
 
-        <!-- <div class="rating" id="ratingStars">
-            <span class="star" onclick="rate(1)">&#9733;</span>
-            <span class="star" onclick="rate(2)">&#9733;</span>
-            <span class="star" onclick="rate(3)">&#9733;</span>
-            <span class="star" onclick="rate(4)">&#9733;</span>
-            <span class="star" onclick="rate(5)">&#9733;</span>
-        </div>
-        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-        <script>
-            function rate(selectedStar) {
-                // Envoie du numéro de l'étoile au script PHP côté serveur
-                $.ajax({
-                    type: "POST",
-                    url: "script.php", // Remplacez script.php par le nom de votre script PHP
-                    data: {
-                        starNumber: selectedStar
-                    },
-                    success: function(response) {
-                        console.log(response); // Afficher la réponse du serveur (si nécessaire)
-                    }
-                });
-            }
-        </script> -->
+
         <?php
 
         try {
@@ -726,47 +779,10 @@ if ($destinationInfo !== false) {
 
 
 
-        <?php
-        // // Connexion à la base de données (remplacez les valeurs par vos propres informations de connexion)
-        // $servername = "localhost";
-        // $username = "root";
-        // $password = "root";
-        // $dbname = "projet";
-
-        // $conn = new mysqli($servername, $username, $password, $dbname);
-
-        // // Vérifier la connexion
-        // if ($conn->connect_error) {
-        //     die("La connexion a échoué : " . $conn->connect_error);
-        // }
-
-        // // ID de destination pour lequel vous souhaitez afficher l'image
-        // $destinationId = 16; // Remplacez par l'ID de la destination que vous souhaitez
-
-        // // Requête SQL pour récupérer le chemin de l'image
-        // $sql = "SELECT Image FROM destinations WHERE DestinationID = $destinationId";
-        // $result = $conn->query($sql);
-
-        // // Vérifier s'il y a des résultats
-        // if ($result->num_rows > 0) {
-        //     // Récupérer le chemin de l'image depuis le résultat de la requête
-        //     $row = $result->fetch_assoc();
-        //     $imagePath = $row['Image'];
-
-        //     // Afficher l'image dans une balise img HTML
-        //     echo '<img src="' . $imagePath . '" alt="Image de la destination">';
-        // } else {
-        //     echo "Aucun résultat trouvé pour l'ID de destination fourni.";
-        // }
-
-        // // Fermer la connexion à la base de données
-        // $conn->close();
-        ?>
 
 
 
         <?php require_once('footer.php'); ?>
-
 
 
         < /body>

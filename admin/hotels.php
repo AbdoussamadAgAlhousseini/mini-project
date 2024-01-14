@@ -11,7 +11,9 @@
 <body>
     <div class="container">
         <div class="sidebar">
-            <a href="dashboard.html"><h2>ALMA</h2></a>
+            <a href="dashboard.html">
+                <h2>ALMA</h2>
+            </a>
             <a href="dashboard.html">Dashboard</a>
             <a href="admin.php">Admin</a>
             <a href="booking.php">Bookings</a>
@@ -35,7 +37,7 @@
                             <th>DateFin</th>
                             <th>N˚ personnes</th>
                             <th>statut</th>
-                            <th>Changer statut</th>
+                            <th>Confirmer la reservation</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -71,7 +73,7 @@
 
                                 if (isset($_POST["submit"])) {
                                     $idclient = $_POST["idclient"];
-                                    $sql = "UPDATE ReservationsHotels SET Statut = 'confirme' WHERE idclient = :idclient";
+                                    $sql = "UPDATE ReservationsHotels SET Statut = 'confirmée' WHERE idclient = :idclient";
                                     $stmt = $connexion->prepare($sql);
                                     $stmt->bindParam(':idclient', $idclient);
                                     $stmt->execute();

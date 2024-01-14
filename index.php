@@ -345,7 +345,7 @@ if ($destinationInfo !== false) {
                         <img class="img-fluid taille" src="img/inde.jpg" alt="">
                         <a class="destination-overlay text-white text-decoration-none" href="">
                             <h5 class="text-white">Inde</h5>
-                            <span>100 Cities</span>
+                            <span>1000</span>
                         </a>
                     </div>
                 </div>
