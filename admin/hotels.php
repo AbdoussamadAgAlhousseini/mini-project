@@ -79,7 +79,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             <!-- Hotel Table Section -->
             <section id="hotel-table">
-                <div class="btn">
+                
                    
                     <form method="post" action="">
                          <div class="title">
@@ -115,7 +115,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                             </tbody>
                         </table>
                     </form>
-                </div>
+                
             </section>
             <footer>
                 <p>&copy; 2023 ALMA</p>
