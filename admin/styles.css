@@ -50,6 +50,7 @@ body {
 }
 
 header {
+    margin-left: 2rem;
     background-color: #4caf50;
     color: white;
     padding: 10px;
@@ -62,8 +63,8 @@ header {
 }
 /* Apply basic styling to the form */
 form {
-    width: 600px;
-    margin: 20px auto;
+    width: 900px;
+    margin: 10px auto;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
