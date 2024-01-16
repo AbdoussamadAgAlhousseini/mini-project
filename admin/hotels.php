@@ -1,10 +1,58 @@
+<?php
+require_once('dbcon.php');
+
+function displayHotels($connexion){
+    $sql = 'SELECT ReservationHotelID, idclient, DestinationID, DateDebut, DateFin, NombrePersonnes, Statut FROM ReservationsHotels';
+    $stmt = $connexion->prepare($sql);
+    $stmt->execute();
+
+    // Fetch the results as an associative array
+    $hotels = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    return $hotels;
+}
+
+$hotels = displayHotels($connexion);
+
+function confirmHotels($connexion, $ids)
+{
+    if (isset($_POST["confirmer"]) && isset($_POST["check"])) {
+        try {
+            $idsString = implode(',', $ids);
+
+            $sql = "UPDATE ReservationsHotels SET Statut = 'Confirmée' WHERE ReservationHotelID IN ($idsString)";
+            $stmt = $pdo->prepare($sql);
+
+            $stmt->execute();
+
+            echo "Records confirmed successfully!";
+        } catch (PDOException $e) {
+            die('Error: ' . $e->getMessage());
+        }
+    }
+}
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    if (isset($_POST["confirmer"]) && isset($_POST["check"])) {
+        $checkedIds = $_POST["check"];
+
+        if (!empty($checkedIds)) {
+            confirmHotels($connexion, $checkedIds);
+            $hotels = displayHotels($connexion);
+        } else {
+            echo "Veuillez sélectionner au moins un hotel pour être confirmé.";
+        }
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flights - Admin Dashboard</title>
+    <title>Hotels - Admin Dashboard</title>
     <link rel="stylesheet" href="admin.css">
 </head>
 
@@ -23,72 +71,40 @@
                 <h1>Hotels Management</h1>
             </header>
 
-            <!-- Flight Table Section -->
-            <section id="flight-table">
-                <h2>Liste d'hotels</h2>
-                <table class="styled-table">
-                    <thead>
-                        <tr>
-                            <th>IDclient</th>
-                            <th>DestinationID</th>
-                            <th>DateDebut</th>
-                            <th>DateFin</th>
-                            <th>N˚ personnes</th>
-                            <th>statut</th>
-                            <th>Changer statut</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        try {
-                            $serveur = "localhost";
-                            $utilisateur = "root";
-                            $motDePass = "root";
-                            $baseDeDonnees = "projet";
-
-                            $connexion = new PDO("mysql:host=$serveur;dbname=$baseDeDonnees", $utilisateur, $motDePass);
-                            $sql = "SELECT `idclient`, `DestinationID`, `DateDebut`, `DateFin`, `NombrePersonnes`, `Statut` FROM `ReservationsHotels` 
-                                    WHERE Statut = 'En Attente'";
-                            $stmt = $connexion->query($sql);
-
-                            if ($stmt->rowCount() > 0) {
-                                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                                    echo "<tr>
-                                            <td>" . $row["idclient"] . "</td>
-                                            <td>" . $row["DestinationID"] . "</td>
-                                            <td>" . $row["DateDebut"] . "</td>
-                                            <td>" . $row["DateFin"] . "</td>
-                                            <td>" . $row["NombrePersonnes"] . "</td>
-                                            <td>" . $row["Statut"] . "</td>
-                                            <td> 
-                                                <form method='post' action='' style='width: 150px;'>
-                                                    <input type='hidden' name='idclient' value='" . $row["idclient"] . "'>
-                                                    <input type='submit' value='Modifier Statut' name='submit'>
-                                                </form>
-                                            </td>
-                                          </tr>";
-                                }
-
-                                if (isset($_POST["submit"])) {
-                                    $idclient = $_POST["idclient"];
-                                    $sql = "UPDATE ReservationsHotels SET Statut = 'confirme' WHERE idclient = :idclient";
-                                    $stmt = $connexion->prepare($sql);
-                                    $stmt->bindParam(':idclient', $idclient);
-                                    $stmt->execute();
-
-                                    echo "Le statut a été mis à jour avec succès.";
-                                }
-                            } else {
-                                echo "<tr><td colspan='6'>Aucun résultat trouvé.</td></tr>";
-                            }
-                        } catch (PDOException $e) {
-                            echo "Erreur de connexion à la base de données : " . $e->getMessage();
-                        } finally {
-                            $connexion = null;
-                        }
-                        ?>
-                    </tbody>
-                </table>
+            <!-- Hotel Table Section -->
+            <section id="hotel-table">
+                
+                    <div class="btn">
+                        <h2>Liste d'hotels</h2>
+                        <button type="submit" name="confirmer">Confirmer</button>
+                    </div>
+                    <table class="styled-table">
+                        <thead>
+                            <tr>
+                                <th>IDclient</th>
+                                <th>DestinationID</th>
+                                <th>DateDebut</th>
+                                <th>DateFin</th>
+                                <th>NombrePersonnes</th>
+                                <th>Statut</th>
+                                <th>Confirmer</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($hotels as $value): ?>
+                                <tr>
+                                    <td><?= $value['idclient']; ?></td>
+                                    <td><?= $value['DestinationID']; ?></td>
+                                    <td><?= $value['DateDebut']; ?></td>
+                                    <td><?= $value['DateFin']; ?></td>
+                                    <td><?= $value['NombrePersonnes']; ?></td>
+                                    <td><?= $value['Statut']; ?></td>
+                                    <td><input type="checkbox" name="check[]" value="<?= $value['ReservationHotelID'] ?>" ></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                
             </section>
             <footer>
                 <p>&copy; 2023 ALMA</p>
