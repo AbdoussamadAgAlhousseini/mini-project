@@ -16,19 +16,24 @@ $hotels = displayHotels($connexion);
 
 function confirmHotels($connexion, $ids)
 {
-    if (isset($_POST["confirmer"]) && isset($_POST["check"])) {
-        try {
-            $idsString = implode(',', $ids);
+    // Ensure $ids is an array before proceeding
+    if (!is_array($ids)) {
+        throw new InvalidArgumentException('$ids must be an array');
+    }
 
-            $sql = "UPDATE ReservationsHotels SET Statut = 'Confirmée' WHERE ReservationHotelID IN ($idsString)";
-            $stmt = $pdo->prepare($sql);
+    // Validate and sanitize $ids to prevent SQL injection
+    $sanitizedIds = array_map('intval', $ids);
 
-            $stmt->execute();
+    try {
+        $idsString = implode(',', $sanitizedIds);
 
-            echo "Records confirmed successfully!";
-        } catch (PDOException $e) {
-            die('Error: ' . $e->getMessage());
-        }
+        $sql = "UPDATE ReservationsHotels SET Statut = 'Confirmée' WHERE ReservationHotelID IN ($idsString) AND Statut = 'En Attente'";
+
+        $stmt = $connexion->prepare($sql);
+        $stmt->execute();
+
+    } catch (PDOException $e) {
+        echo 'Error: ' . $e->getMessage(); // Use echo for consistent output
     }
 }
 
@@ -38,9 +43,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         if (!empty($checkedIds)) {
             confirmHotels($connexion, $checkedIds);
+            // Assuming displayHotels() handles output, remove extra echo:
             $hotels = displayHotels($connexion);
         } else {
-            echo "Veuillez sélectionner au moins un hotel pour être confirmé.";
+            echo "Veuillez sélectionner au moins un hôtel pour être confirmé.";
         }
     }
 }
@@ -53,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels - Admin Dashboard</title>
-    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
@@ -73,38 +79,41 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             <!-- Hotel Table Section -->
             <section id="hotel-table">
-                
-                    <div class="btn">
-                        <h2>Liste d'hotels</h2>
+                <div class="btn">
+                   
+                    <form method="post" action="">
+                         <h2>Liste d'hotels</h2>
                         <button type="submit" name="confirmer">Confirmer</button>
-                    </div>
-                    <table class="styled-table">
-                        <thead>
-                            <tr>
-                                <th>IDclient</th>
-                                <th>DestinationID</th>
-                                <th>DateDebut</th>
-                                <th>DateFin</th>
-                                <th>NombrePersonnes</th>
-                                <th>Statut</th>
-                                <th>Confirmer</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php foreach ($hotels as $value): ?>
+                        <table class="styled-table">
+                            <thead>
                                 <tr>
-                                    <td><?= $value['idclient']; ?></td>
-                                    <td><?= $value['DestinationID']; ?></td>
-                                    <td><?= $value['DateDebut']; ?></td>
-                                    <td><?= $value['DateFin']; ?></td>
-                                    <td><?= $value['NombrePersonnes']; ?></td>
-                                    <td><?= $value['Statut']; ?></td>
-                                    <td><input type="checkbox" name="check[]" value="<?= $value['ReservationHotelID'] ?>" ></td>
+                                    <th>IDreservation</th>
+                                    <th>IDclient</th>
+                                    <th>DestinationID</th>
+                                    <th>DateDebut</th>
+                                    <th>DateFin</th>
+                                    <th>NombrePersonnes</th>
+                                    <th>Statut</th>
+                                    <th>Confirmer</th>
                                 </tr>
-                            <?php endforeach; ?>
-                        </tbody>
-                    </table>
-                
+                            </thead>
+                            <tbody>
+                                <?php foreach ($hotels as $value): ?>
+                                    <tr>
+                                        <td><?= $value['ReservationHotelID']; ?></td>
+                                        <td><?= $value['idclient']; ?></td>
+                                        <td><?= $value['DestinationID']; ?></td>
+                                        <td><?= $value['DateDebut']; ?></td>
+                                        <td><?= $value['DateFin']; ?></td>
+                                        <td><?= $value['NombrePersonnes']; ?></td>
+                                        <td><?= $value['Statut']; ?></td>
+                                        <td><input type="checkbox" name="check[]" value="<?= $value['ReservationHotelID'] ?>" ></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
             </section>
             <footer>
                 <p>&copy; 2023 ALMA</p>
