@@ -1,3 +1,21 @@
+<?php
+require_once('dbcon.php');
+
+function displayVols($connexion){
+    $sql = 'SELECT ReservationVolID, idclient, DestinationID, DateDepart, DateRetour, NombrePassagers, Statut FROM ReservationsVols';
+    $stmt = $connexion->prepare($sql);
+    $stmt->execute();
+
+    // Fetch the results as an associative array
+    $vols = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    return $vols;
+}
+
+$vols = displayVols($connexion);
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,6 +47,7 @@
                 <table class="styled-table">
                     <thead>
                         <tr>
+                            <th>ReservationVolID</th>
                             <th>IDclient</th>
                             <th>DestinationID</th>
                             <th>Date depart</th>
@@ -39,55 +58,18 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php
-                        try {
-                            $serveur = "localhost";
-                            $utilisateur = "root";
-                            $motDePass = "root";
-                            $baseDeDonnees = "projet";
-
-                            $connexion = new PDO("mysql:host=$serveur;dbname=$baseDeDonnees", $utilisateur, $motDePass);
-
-                            $sql = "SELECT `idclient`, `DestinationID`, `DateDepart`, `DateRetour`, `NombrePassagers`, `Statut` FROM `ReservationsVols` 
-                                    WHERE Statut = 'En Attente'";
-                            $stmt = $connexion->query($sql);
-
-                            if ($stmt->rowCount() > 0) {
-                                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                                    echo "<tr>
-                                            <td>" . $row["idclient"] . "</td>
-                                            <td>" . $row["DestinationID"] . "</td>
-                                            <td>" . $row["DateDepart"] . "</td>
-                                            <td>" . $row["DateRetour"] . "</td>
-                                            <td>" . $row["NombrePassagers"] . "</td>
-                                            <td>" . $row["Statut"] . "</td>
-                                            <td> 
-                                                <form method='post' action='' style='width: 150px;'>
-                                                    <input type='hidden' name='idclient' value='" . $row["idclient"] . "'>
-                                                    <input type='submit' value='Modifier Statut' name='submit'>
-                                                </form>
-                                            </td>
-                                          </tr>";
-                                }
-
-                                if (isset($_POST["submit"])) {
-                                    $idclient = $_POST["idclient"];
-                                    $sql = "UPDATE ReservationsVols SET Statut = 'confirme' WHERE idclient = :idclient";
-                                    $stmt = $connexion->prepare($sql);
-                                    $stmt->bindParam(':idclient', $idclient);
-                                    $stmt->execute();
-
-                                    echo "Le statut a été mis à jour avec succès.";
-                                }
-                            } else {
-                                echo "<tr><td colspan='6'>Aucun résultat trouvé.</td></tr>";
-                            }
-                        } catch (PDOException $e) {
-                            echo "Erreur de connexion à la base de données : " . $e->getMessage();
-                        } finally {
-                            $connexion = null;
-                        }
-                        ?>
+                    <?php foreach ($vols as $value): ?>
+                                    <tr>
+                                        <td><?= $value['ReservationVolID']; ?></td>
+                                        <td><?= $value['idclient']; ?></td>
+                                        <td><?= $value['DestinationID']; ?></td>
+                                        <td><?= $value['DateDepart']; ?></td>
+                                        <td><?= $value['DateRetour']; ?></td>
+                                        <td><?= $value['NombrePassagers']; ?></td>
+                                        <td><?= $value['Statut']; ?></td>
+                                        <td><input type="checkbox" name="check[]" value="<?= $value['ReservationVolID'] ?>" ></td>
+                                    </tr>
+                                <?php endforeach; ?>
                     </tbody>
                 </table>
             </section>
