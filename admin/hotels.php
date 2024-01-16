@@ -82,8 +82,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 <div class="btn">
                    
                     <form method="post" action="">
-                         <h2>Liste d'hotels</h2>
-                        <button type="submit" name="confirmer">Confirmer</button>
+                         <div class="title">
+                            <h2>Liste d'hotels</h2>
+                            <div class="btn"><button type="submit" name="confirmer">Confirmer</button></div>
+                         </div>
                         <table class="styled-table">
                             <thead>
                                 <tr>
