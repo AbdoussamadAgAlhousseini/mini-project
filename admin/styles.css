@@ -57,13 +57,14 @@ header {
     text-align: center;
 }
 .title{
-    text-align: center;
-    text-transform: capitalize;
+    display: flex;
+    justify-content: space-between;
     font-weight: 600;
 }
+
 /* Apply basic styling to the form */
 form {
-    width: 900px;
+    width: 1100px;
     margin: 10px auto;
     padding: 20px;
     border: 1px solid #ccc;
