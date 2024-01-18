@@ -1,0 +1,185 @@
+.form-con {
+    width: 100vw;
+}
+.headline {
+    background-color: #2ecc71;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    text-align: center;
+    text-transform: capitalize;
+    font-size: larger;
+}
+.headline h2 {
+    color: #e7ecd7;
+}
+form {
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+  }
+  
+  input[type="text"],
+  input[type="number"],
+  input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  button {
+    background-color: #2ecc71;
+    color: #fff;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #032411;
+  }
+  
+  /* Hover effect for links */
+  a:hover {
+    text-decoration: underline;
+  }
+  
+  body, h1, h2, p, a {
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    background-color: #f4f4f4;
+    font-family: Arial, sans-serif;
+    overflow-y: hidden;
+  }
+  
+  /* Container styling */
+  .container {
+    display: flex;
+  }
+  /* Form styling */
+  
+  /* Sidebar styling */
+  .sidebar {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    min-width: 200px;
+    height: 100vh; /* Set height to 100% of viewport height */
+  }
+  
+  .sidebar h2 {
+    margin-bottom: 10px;
+    color: #f0f0f0;
+  }
+  
+  .sidebar a {
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 0;
+  }
+  
+  .sidebar a:hover {
+    background-color: #555;
+  }
+  
+  
+  /* Content styling */
+  .content {
+    flex: 1;
+    padding: 20px;
+  }
+  
+  /* Header styling */
+  header {
+    background-color: #fff;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  /* Main section styling */
+  .main {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  /* Card styling */
+  .card {
+    background-color: #f0f0f0; /* Light gray background */
+    border: 1px solid #ccc; /* Light border color */
+    border-radius: 8px;
+    padding: 20px;
+    margin: 10px;
+    flex: 1 1 calc(33.333% - 20px);
+  }
+  
+  /* Admin card styling */
+  .admin {
+    background-color: #3498db; /* Blue color */
+    color: #fff; /* White text color */
+  }
+  
+  /* Booking card styling */
+  .booking {
+    background-color: #f39c12; /* Orange color */
+    color: #fff; /* White text color */
+  }
+  
+  /* Flights card styling */
+  .flights {
+    background-color: #2ecc71; /* Green color */
+    color: #fff; /* White text color */
+  }
+  
+  /* Hotels card styling */
+  .hotels {
+    background-color: #e74c3c; /* Red color */
+    color: #fff; /* White text color */
+  }
+  
+  /* Heading (h2) styling */
+  h2 {
+    color: #333;
+  }
+  
+  /* Paragraph (p) styling */
+  p {
+    color: #fff; /* White text color for better readability */
+  }
+  
+  /* Link (a) styling */
+  a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  /* Arrow character styling */
+  .arrow {
+    font-size: 20px;
+    margin-left: 5px;
+  }
+  
+  /* Hover effect for links */
+  a:hover {
+    text-decoration: underline;
+  }
