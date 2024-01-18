@@ -1,154 +1,98 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,600;1,200&display=swap');
-
-
-body {
-    font-family: poppins, sans-serif;
-    margin: 0;
-    padding: 0; 
+/* Reset some default styles to ensure consistency */
+body, h1, h2, p, a {
+  margin: 0;
+  padding: 0;
 }
 
+/* Apply a background color to the body */
+body {
+  background-color: #f4f4f4;
+  font-family: Arial, sans-serif;
+  overflow-y: hidden;
+}
 
+/* Container styling */
 .container {
   display: flex;
-  flex-grow: 1; 
 }
 
+/* Sidebar styling */
 .sidebar {
-  background-color: #555;
-  color: white;
+  background-color: #333;
+  color: #fff;
   padding: 20px;
-  width: 200px;
-  box-sizing: border-box;
-  height: 100vh; 
-  position: fixed; 
+  min-width: 200px;
+  height: 100vh; /* Set height to 100% of viewport height */
 }
 
 .sidebar h2 {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+  color: #f0f0f0;
 }
-
 
 .sidebar a {
   display: block;
-  padding: 10px;
+  color: #fff;
   text-decoration: none;
-  color: white;
-  font-weight: bold;
-  border-bottom: 1px solid #555;
-  cursor: pointer;
+  padding: 10px 0;
 }
 
 .sidebar a:hover {
   background-color: #555;
 }
 
+
+/* Content styling */
 .content {
-    flex-grow: 1;
-    padding: 20px;
-    box-sizing: border-box;
-    margin-left: 200px; 
+  flex: 1;
+  padding: 20px;
 }
 
+/* Header styling */
 header {
-    margin-left: 2rem;
-    background-color: #4caf50;
-    color: white;
-    padding: 10px;
-    text-align: center;
-}
-.title{
-    display: flex;
-    justify-content: space-between;
-    font-weight: 600;
+  background-color: #fff;
+  padding: 20px;
+  text-align: center;
 }
 
-/* Apply basic styling to the form */
-form {
-    width: 1100px;
-    margin: 10px auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f8f8f8;
-  }
-  
-  /* Style the fieldset and legend */
-  fieldset {
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 10px;
-    margin-bottom: 15px;
-  }
-  
-  legend {
-    font-weight: bold;
-    text-transform: uppercase;
-    color: #000000;
-  }
+/* Main section styling */
+.main {
+  display: flex;
+  flex-wrap: wrap;
+}
 
-  label {
-    display: block;
-    margin-bottom: 8px;
-  }
-
-  select{
-    padding: 8px;
-    width: 100%;
-  }
-  
-  input {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 15px;
-    box-sizing: border-box;
-  }
-  
-  /* Style the submit button */
-  .btn {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-  }
-  button {
-    background-color: #4caf50;
-    color: #fff;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #45a049;
-  }
-
-  /* General styling for cards */
+/* Card styling */
 .card {
-  border: 1px solid #ddd;
+  background-color: #f0f0f0; /* Light gray background */
+  border: 1px solid #ccc; /* Light border color */
   border-radius: 8px;
   padding: 20px;
   margin: 10px;
-  text-align: center;
+  flex: 1 1 calc(33.333% - 20px);
 }
 
 /* Admin card styling */
 .admin {
-  background-color: #f0f0f0;
+  background-color: #3498db; /* Blue color */
+  color: #fff; /* White text color */
 }
 
 /* Booking card styling */
 .booking {
-  background-color: #d9f7e0;
+  background-color: #f39c12; /* Orange color */
+  color: #fff; /* White text color */
 }
 
 /* Flights card styling */
 .flights {
-  background-color: #b3e0ff;
+  background-color: #2ecc71; /* Green color */
+  color: #fff; /* White text color */
 }
 
 /* Hotels card styling */
 .hotels {
-  background-color: #ffd9b3;
+  background-color: #e74c3c; /* Red color */
+  color: #fff; /* White text color */
 }
 
 /* Heading (h2) styling */
@@ -158,7 +102,7 @@ h2 {
 
 /* Paragraph (p) styling */
 p {
-  color: #666;
+  color: #fff; /* White text color for better readability */
 }
 
 /* Link (a) styling */
@@ -177,80 +121,3 @@ a {
 a:hover {
   text-decoration: underline;
 }
-
-
-    /* General styling for the page */
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #f4f4f4;
-    }
-
-    .main {
-        max-width: 800px;
-        margin: 20px auto;
-        padding: 20px;
-        background-color: #fff;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-
-    /* Styling for the Flight Table section */
-    #flight-table {
-        margin-top: 20px;
-    }
-
-    h2 {
-        color: #333;
-    }
-
-    /* Styling for the table */
-    .styled-table {
-        width: 100%;
-        border-collapse: collapse;
-        margin: 25px 0;
-        font-size: 18px;
-        text-align: left;
-    }
-
-    .styled-table th,
-    .styled-table td {
-        padding: 12px 15px;
-        border-bottom: 1px solid #ddd;
-    }
-
-    .styled-table th {
-        background-color: #f2f2f2;
-    }
-
-    /* Styling for table rows */
-    .styled-table tbody tr:hover {
-        background-color: #f5f5f5;
-    }
-
-    /* Styling for table data */
-    .styled-table td {
-        color: #666;
-    }
-
-    /* Status column specific styling */
-    .styled-table .status {
-        color: #fff;
-        font-weight: bold;
-        padding: 8px 12px;
-        border-radius: 5px;
-    }
-
-    .styled-table .status.pending {
-        background-color: #ffcc00; /* yellow */
-    }
-
-    .styled-table .status.completed {
-        background-color: #4caf50; /* green */
-    }
-
-    .styled-table .status.canceled {
-        background-color: #ff6666; /* red */
-    }
-
-
