@@ -73,8 +73,11 @@ if (isset($_POST["ajouter"])) {
             <a href="vols.php">Flights</a>
             <a href="hotels.php">Hotels</a>
         </div>
-
-        <form action="" method="post" enctype="multipart/form-data"> <!-- Added enctype for handling file uploads -->
+    <div class="form-con">
+        <div class="headline">
+            <h2>welcome to admin dashboard</h2>
+        </div>
+        <form action="" method="post" enctype="multipart/form-data">
           <div class="form-group">
             <label for="nom_destination">Nom de destination</label>
             <input type="text" name="nom_destination" id="nom_destination" class="form-control" />
@@ -90,7 +93,7 @@ if (isset($_POST["ajouter"])) {
           <div class="form-group">
             <label for="photos">Photos</label>
             <input type="file" name="photos" id="photos" accept="image/*" multiple>
-            <!-- The "accept" attribute restricts file types to images only, and "multiple" allows multiple file selection -->
+            
           </div>
           <button type="submit" name="ajouter" class="btn btn-primary">Ajouter</button>
         </form>
