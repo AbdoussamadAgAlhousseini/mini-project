@@ -134,145 +134,16 @@ if ($destinationInfo !== false) {
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="profile.css">
+
     <style>
-        .profile-info {
-            text-align: center;
-        }
-
-        .profile-picture {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 20px;
-        }
-
-        h1 {
-            color: #333;
-        }
-
-        .reservation-container {
+        /* .general {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 20px;
-        }
-
-        /* Style for reservation sections */
-        h2 {
-            color: #333;
-            font-size: 24px;
-            margin-bottom: 10px;
-        }
-
-        /* Style for individual reservation items */
-        h6 {
-            color: #666;
-            font-size: 16px;
-            margin-top: 15px;
-            margin-bottom: 5px;
-        }
-
-        /* Style for reservation details */
-        p {
-            margin: 5px 0;
-        }
-
-        hr {
-            border: 1px solid #ccc;
-            margin-bottom: 20px;
-        }
-
-        /* Style for no reservation message */
-        .no-reservation {
-            color: #999;
-            font-style: italic;
-        }
-
-        .waiting {
-            background-color: #ccc;
-            color: #000;
-            cursor: wait;
-        }
-
-        .rating {
-            font-size: 24px;
-            /* Ajustez la taille des étoiles selon vos besoins */
-        }
-
-        .star {
-            color: gold;
-            /* Couleur des étoiles remplies */
-        }
-
-        /* Style pour étoiles non remplies (cinq étoiles vides) */
-        .star:empty {
-            color: #ddd;
-        }
-
-
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 20px;
-            text-align: center;
-        }
-
-        .profile-info {
-            background-color: #f0f0f0;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .profile-picture {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            margin-bottom: 15px;
-        }
-
-        h1 {
-            color: #333;
-        }
-
-        .deconnexion a {
-            text-decoration: none;
-            color: #007bff;
-        }
-
-        .deconnexion a:hover {
-            text-decoration: underline;
-        }
-
-        .inutilediv {
-            margin-top: 20px;
-            background-color: #ddd;
-            padding: 10px;
-        }
-
-        p {
-            margin: 0;
-            color: #555;
-        }
-
-        /* Optional: Add more styles as needed */
-
-
-        .btn-disabl {
-            opacity: 0.7;
-            /* Réduire l'opacité pour indiquer qu'il est désactivé */
-            cursor: not-allowed;
-            /* Changer le curseur pour indiquer qu'il est désactivé */
-            background-color: green;
-            /* Changer la couleur de fond */
-            color: #fff;
-            /* Changer la couleur du texte */
-            border: 1px solid #ccc;
-            /* Ajouter une bordure */
-        }
+            background: #000;
+            width: 100%;
+        } */
     </style>
-
-
 
 
 
@@ -286,6 +157,7 @@ if ($destinationInfo !== false) {
             <img src="dv.svg" alt="Photo de profil" class="profile-picture">
             <h1>Bienvenue, <?php echo $prenom . ' ' . $nom_utilisateur; ?>!</h1>
             <div class="deconnexion"><a href="deconnexion.php">Se déconnecter</a></div>
+            <div class="deconnexion"><a href="modifier.php">Modifier mon profil</a></div>
             <div class="inutilediv">
                 <p><?php echo $message, $date_retour, $datetest . '  ' . strtotime($datetest); ?>
 
@@ -475,13 +347,13 @@ if ($destinationInfo !== false) {
     <?php
 
     // Fonctions de réservation
-
+    $reservations;
     function afficherReservationsVols($idClient, $connexion)
     {
         // Requête préparée
         $requeteReservations = $connexion->prepare("SELECT * FROM ReservationsVols WHERE idclient = ?");
         $requeteReservations->execute([$idClient]);
-
+        global $reservations;
         // Récupération des réservations
         $reservations = $requeteReservations->fetchAll(PDO::FETCH_ASSOC);
 
@@ -489,7 +361,7 @@ if ($destinationInfo !== false) {
         if ($reservations) {
             echo "<h2>Vos réservations de vols</h2>";
             foreach ($reservations as $reservation) {
-                echo "<h6>Destination</h6>";
+
 
                 $destinationInfo = getDestinationInfo($reservation['DestinationID']);
 
@@ -506,56 +378,45 @@ if ($destinationInfo !== false) {
                 }
 
 
-                echo $nomDestination;
+                echo "<div class='ticket'>";
+                echo "<h2>Informations de réservation</h2>";
+                echo "<p><strong>Destination:</strong> " . $nomDestination . "</p>";
                 echo "<h6>Date de départ</h6>";
-                echo $reservation['DateDepart'];
+                echo "<p>" . $reservation['DateDepart'] . "</p>";
                 echo "<h6>Date de retour</h6>";
-                echo $reservation['DateRetour'];
+                echo "<p>" . $reservation['DateRetour'] . "</p>";
                 echo "<h6>Nombre de passagers</h6>";
-                echo $reservation['NombrePassagers'];
+                echo "<p>" . $reservation['NombrePassagers'] . "</p>";
+
+                $largeurImage = 500;
+                $hauteurImage = 100;
+                $image = imagecreate($largeurImage, $hauteurImage);
+                $couleurFond = imagecolorallocate($image, 255, 255, 255);
+                $couleurTexte = imagecolorallocate($image, 0, 0, 0);
+
+                // Dessiner les informations de réservation sur l'image
+                imagestring($image, 5, 10, 20, "Destination: $nomDestination", $couleurTexte);
+                imagestring($image, 5, 10, 40, "Date de départ: " . $reservation['DateDepart'], $couleurTexte);
+                imagestring($image, 5, 10, 60, "Date de retour: " . $reservation['DateRetour'], $couleurTexte);
+                imagestring($image, 5, 10, 80, "Nombre de passagers: " . $reservation['NombrePassagers'], $couleurTexte);
+
+                // Enregistrer l'image dans un fichier avec un identifiant unique (ID de réservation)
+                $idReservation = $reservation['ReservationVolID'];
+                $nomFichierImage = "reservation_$idReservation.png";
+                imagepng($image, $nomFichierImage);
+
+
 
                 if ($reservation['Statut'] !== "En Attente") {
                     echo "<p>Status : </p> <button class='btn btn-disabl'>" . $reservation['Statut'] . "</button>";
+                    echo "<p> Téléchargez votre Billet de vol: <a href='$nomFichierImage' download>Cliquez ici</a></p>";
+                    imagedestroy($image);
                 } else {
-                    echo "<p>Status : </p> <button  class='waiting'>" . $reservation['Statut'] . "</button>";
+                    echo "<p>Status : </p> <button  class='btn btn-disabled'>" . $reservation['Statut'] . "...</button>";
 
                     echo "<br><a href='supprimeReserveration.php?id=" . $reservation['ReservationVolID'] . "' class='btn btn-danger'>Supprimer cette réservation</a><br><br>";
-
-
-                    // require('./fpdf/fpdf.php');
-
-                    // // Récupérer les informations de la session
-
-                    // $dateDebut = $reservation['DateDepart'];
-                    // $dateFin = $reservation['DateRetour'];
-                    // $nombrePersonnes = $reservation['NombrePassagers'];
-
-                    // // Créer une instance de la classe FPDF
-                    // $pdf = new FPDF();
-                    // $pdf->AddPage();
-
-                    // // Ajouter les informations au PDF
-                    // $pdf->SetFont('Arial', 'B', 16);
-                    // $pdf->Cell(40, 10, 'Nom de la destination: ' . $nomDestination);
-
-                    // $pdf->SetFont('Arial', 'I', 12);
-                    // $pdf->Ln(10);
-                    // $pdf->Cell(40, 10, 'Date de début: ' . $dateDebut);
-                    // $pdf->Ln(8);
-                    // $pdf->Cell(40, 10, 'Date de fin: ' . $dateFin);
-                    // $pdf->Ln(8);
-                    // $pdf->Cell(40, 10, 'Nombre de personnes: ' . $nombrePersonnes);
-
-                    // // Nom du fichier PDF à télécharger
-                    // $filename = 'reservation_vol.pdf';
-
-                    // // Sauvegarder le PDF sur le serveur
-                    // $pdf->Output($filename, 'F');
-
-                    // // Lien de téléchargement
-                    // echo " <button class='btn btn-disabl' > <a href='$filename' download>Télécharger le PDF</a> </button>";
                 }
-
+                echo "</div>";
                 echo "<hr>";
                 $_SESSION['destinationId'] = $reservation['DestinationID'];
             }
@@ -565,12 +426,20 @@ if ($destinationInfo !== false) {
         }
     }
 
+
+
+
+
+
+
+
+    $reservationsHotel;
     function afficherReservationsHotels($idClient, $connexion)
     {
         // Requête préparée
         $requeteReservationsHotel = $connexion->prepare("SELECT * FROM ReservationsHotels WHERE idclient = ?");
         $requeteReservationsHotel->execute([$idClient]);
-
+        global $reservationsHotel;
         // Récupération des réservations
         $reservationsHotel = $requeteReservationsHotel->fetchAll(PDO::FETCH_ASSOC);
 
@@ -578,7 +447,9 @@ if ($destinationInfo !== false) {
         if ($reservationsHotel) {
             echo "<h2>Vos réservations d'hôtels</h2>";
             foreach ($reservationsHotel as $reservationHotel) {
-                echo "<h6>Hôtel</h6>";
+                echo "<div class='ticket'>";
+
+                // echo "<h6>Hôtel</h6>";
 
                 $destinationInfo = getDestinationInfo($reservationHotel['DestinationID']);
 
@@ -594,8 +465,11 @@ if ($destinationInfo !== false) {
                     echo "Aucune information de destination trouvée.";
                 }
 
-                echo $nomDestination;
-                $_SESSION['nomDestination'] = $nomDestination;
+                // echo $nomDestination;
+
+                // $_SESSION['nomDestination'] = $nomDestination;
+                echo "<h2>Informations de réservation</h2>";
+                echo "<p><strong>Pays de l'hotel:</strong> " . $nomDestination . "</p>";
                 echo "<h6>Date de début</h6>";
                 echo $reservationHotel['DateDebut'];
                 echo "<h6>Date de fin</h6>";
@@ -604,54 +478,44 @@ if ($destinationInfo !== false) {
                 echo $reservationHotel['NombrePersonnes'];
 
 
+                $largeurImage = 500;
+                $hauteurImage = 100;
+                $image = imagecreate($largeurImage, $hauteurImage);
+                $couleurFond = imagecolorallocate($image, 255, 255, 255);
+                $couleurTexte = imagecolorallocate($image, 0, 0, 0);
+
+                // Dessiner les informations de réservation sur l'image
+                imagestring($image, 5, 10, 20, "Destination: $nomDestination", $couleurTexte);
+                imagestring($image, 5, 10, 40, "Date de départ: " . $reservationHotel['DateDebut'], $couleurTexte);
+                imagestring($image, 5, 10, 60, "Date de retour: " . $reservationHotel['DateFin'], $couleurTexte);
+                imagestring($image, 5, 10, 80, "Nombre de passagers: " . $reservationHotel['NombrePersonnes'], $couleurTexte);
+
+                // Enregistrer l'image dans un fichier avec un identifiant unique (ID de réservation)
+                $idReservationh = $reservationHotel['ReservationHotelID'];
+                $nomFichierImage = "reservation_$idReservationh.png";
+                imagepng($image, $nomFichierImage);
+
+
 
                 if ($reservationHotel['Statut'] !== "En Attente") {
+                    // echo "<p>Status : </p> <button class='btn btn-disabl'>" . $reservationHotel['Statut'] . "</button>";
+
                     echo "<p>Status : </p> <button class='btn btn-disabl'>" . $reservationHotel['Statut'] . "</button>";
-
-
-                    // require('./fpdf/fpdf.php');
-
-                    // // Récupérer les informations de la session
-                    // $nomDestination = $_SESSION['nomDestination'];
-                    // $dateDebut = $reservationHotel['DateDebut'];
-                    // $dateFin = $reservationHotel['DateFin'];
-                    // $nombrePersonnes = $reservationHotel['NombrePersonnes'];
-
-                    // // Créer une instance de la classe FPDF
-                    // $pdf = new FPDF();
-                    // $pdf->AddPage();
-
-                    // // Ajouter les informations au PDF
-                    // $pdf->SetFont('Arial', 'B', 16);
-                    // $pdf->Cell(40, 10, 'Nom de la destination: ' . $nomDestination);
-
-                    // $pdf->SetFont('Arial', 'I', 12);
-                    // $pdf->Ln(10);
-                    // $pdf->Cell(40, 10, 'Date de début: ' . $dateDebut);
-                    // $pdf->Ln(8);
-                    // $pdf->Cell(40, 10, 'Date de fin: ' . $dateFin);
-                    // $pdf->Ln(8);
-                    // $pdf->Cell(40, 10, 'Nombre de personnes: ' . $nombrePersonnes);
-
-                    // // Nom du fichier PDF à télécharger
-                    // $filename = 'reservation_hotel.pdf';
-
-                    // // Sauvegarder le PDF sur le serveur
-                    // $pdf->Output($filename, 'F');
-
-                    // // Lien de téléchargement
-                    // echo " <button class='btn btn-disabl' > <a href='$filename' download>Télécharger le PDF</a> </button>";
+                    echo "<p> Téléchargez votre Billet de vol: <a href='$nomFichierImage' download>Cliquez ici</a></p>";
+                    imagedestroy($image);
                 } else {
 
 
 
 
 
-                    echo "<br><a href='supprimerReservation.php?id=" . $reservationHotel['ReservationHotelID'] . "' class='btn btn-danger'>Supprimer cette réservation</a><br><br>";
-                    echo "<p>Status : </p> <button class='btn btn-disabled'>" . $reservationHotel['Statut'] . "...</button>";
-                    echo "<hr>";
-                }
+                    echo "<p>Status : </p> <button  class='btn btn-disabled'>" . $reservationHotel['Statut'] . "...</button>";
 
+                    echo "<br><a href='supprimeReserveration.php?id=" . $reservationHotel['ReservationHotelID'] . "' class='btn btn-danger'>Supprimer cette réservation</a><br><br>";
+                }
+                echo "</div>";
+
+                echo "<hr>";
 
 
                 // Récupération des informations de la réservation
@@ -677,6 +541,7 @@ if ($destinationInfo !== false) {
 
 
     ?>
+
     <div class="reservation-container">
         <div class="flight-reservations">
             <?php
@@ -692,16 +557,28 @@ if ($destinationInfo !== false) {
             ?>
         </div>
     </div>
-    <div class="commentaire">
-        <h5>Que pensez vous de nos services</h5>
-        <form action="" method="post" enctype="multipart/form-data">
-            <input type="textarea" id="commentaire" name="commentaire" class="form-control" placeholder="Entrez votre commentaire..." required>
 
-            <!-- <button type="button" class="btn btn-primary py-md-3 px-md-5 mt-2 style" onclick="ajouterCommentaire()">Ajouter un commentaire</button> -->
-            <button type="submit" class="btn btn-primary py-md-3 px-md-5 mt-2 style">Ajouter un commentaire</button>
-        </form>
 
-    </div>
+
+
+    <?php
+    if ($reservations || $reservationsHotel) {
+        echo '<div class="commentaire">
+                <h5>Que pensez-vous de nos services</h5>
+                <form action="" method="post" enctype="multipart/form-data">
+                    <textarea id="commentaire" name="commentaire" class="form-control" placeholder="Entrez votre commentaire..." required></textarea>
+    
+                    <!-- <button type="button" class="btn btn-primary py-md-3 px-md-5 mt-2 style" onclick="ajouterCommentaire()">Ajouter un commentaire</button> -->
+                    <button type="submit" class="btn btn-primary py-md-3 px-md-5 mt-2 style">Ajouter un commentaire</button>
+                </form>
+            </div>';
+    }
+    ?>
+
+
+
+
+
 
     <div class="container-fluid py-5">
         <div class="container pt-5 pb-3">
@@ -775,8 +652,9 @@ if ($destinationInfo !== false) {
 
         // Fermer la connexion à la base de données
         $dbh = null;
-        ?>
 
+
+        ?>
 
 
 

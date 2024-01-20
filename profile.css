@@ -1,0 +1,163 @@
+   .profile-info {
+       text-align: center;
+   }
+
+   .profile-picture {
+       width: 150px;
+       height: 150px;
+       border-radius: 50%;
+       object-fit: cover;
+       margin-bottom: 20px;
+   }
+
+   h1 {
+       color: #333;
+   }
+
+   .reservation-container {
+       display: flex;
+       justify-content: space-between;
+       margin-bottom: 100px;
+   }
+
+   /* Style for reservation sections */
+   h2 {
+       color: #333;
+       font-size: 24px;
+       margin-bottom: 10px;
+   }
+
+   /* Style for individual reservation items */
+   h6 {
+       color: #666;
+       font-size: 16px;
+       margin-top: 15px;
+       margin-bottom: 5px;
+   }
+
+   /* Style for reservation details */
+   p {
+       margin: 5px 0;
+   }
+
+   hr {
+       border: 1px solid #ccc;
+       margin-bottom: 20px;
+   }
+
+   /* Style for no reservation message */
+   .no-reservation {
+       color: #999;
+       font-style: italic;
+   }
+
+   .waiting {
+       background-color: #ccc;
+       color: #000;
+       cursor: wait;
+   }
+
+   .rating {
+       font-size: 24px;
+       /* Ajustez la taille des étoiles selon vos besoins */
+   }
+
+   .star {
+       color: gold;
+       /* Couleur des étoiles remplies */
+   }
+
+   /* Style pour étoiles non remplies (cinq étoiles vides) */
+   .star:empty {
+       color: #ddd;
+   }
+
+
+   .container {
+       max-width: 1000px;
+       margin: 0 auto;
+       padding: 20px;
+       text-align: center;
+   }
+
+   .profile-info {
+       background-color: #f0f0f0;
+       border-radius: 8px;
+       padding: 20px;
+       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+   }
+
+   .profile-picture {
+       width: 100px;
+       height: 100px;
+       border-radius: 50%;
+       margin-bottom: 15px;
+   }
+
+   h1 {
+       color: #333;
+   }
+
+   .deconnexion a {
+       text-decoration: none;
+       color: #007bff;
+   }
+
+   .deconnexion a:hover {
+       text-decoration: underline;
+   }
+
+   .inutilediv {
+       margin-top: 20px;
+       background-color: #ddd;
+       padding: 10px;
+   }
+
+   p {
+       margin: 0;
+       color: #555;
+   }
+
+   /* Optional: Add more styles as needed */
+
+
+   .btn-disabl {
+       opacity: 0.7;
+       /* Réduire l'opacité pour indiquer qu'il est désactivé */
+       cursor: not-allowed;
+       /* Changer le curseur pour indiquer qu'il est désactivé */
+       background-color: green;
+       /* Changer la couleur de fond */
+       color: #fff;
+       /* Changer la couleur du texte */
+       border: 1px solid #ccc;
+       /* Ajouter une bordure */
+   }
+
+
+
+   .ticket {
+       border: 2px solid #3498db;
+       border-radius: 10px;
+       padding: 15px;
+       margin: 20px;
+       width: 100%;
+   }
+
+   h2 {
+       color: #3498db;
+   }
+
+   h6 {
+       color: #2c3e50;
+   }
+
+   p {
+       margin: 5px 0;
+   }
+
+   .general {
+       display: flex;
+       justify-content: space-between;
+       background: #000;
+   }
