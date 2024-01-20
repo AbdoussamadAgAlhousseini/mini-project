@@ -157,7 +157,7 @@ if ($destinationInfo !== false) {
             <img src="dv.svg" alt="Photo de profil" class="profile-picture">
             <h1>Bienvenue, <?php echo $prenom . ' ' . $nom_utilisateur; ?>!</h1>
             <div class="deconnexion"><a href="deconnexion.php">Se déconnecter</a></div>
-            <div class="deconnexion"><a href="modifier.php">Modifier mon profil</a></div>
+            <div class="deconnexion"><a href="./modifier.php">Modifier mon profil</a></div>
             <div class="inutilediv">
                 <p><?php echo $message, $date_retour, $datetest . '  ' . strtotime($datetest); ?>
 

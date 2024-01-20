@@ -1,71 +1,59 @@
 <?php
 session_start(); // Démarrer la session
 
-// Vérifier si l'utilisateur est déjà connecté
+
 if (isset($_SESSION['idclient'])) {
-    header("Location: profil.php"); // Rediriger vers la page d'accueil
+    header("Location: profil.php");
     exit();
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Inclure le fichier de connexion à la base de données
-    // require_once('connexion.php');
+
 
 
 
     $serveur = "localhost";
     $utilisateur = "root";
-    $motDePasse = "root"; // Mot de passe MySQL
-    $baseDeDonnees = "projet"; // Nom de la base de données
+    $motDePasse = "root";
+    $baseDeDonnees = "projet";
 
     try {
-        // Créer une connexion PDO
+
         $connexion = new PDO("mysql:host=$serveur;dbname=$baseDeDonnees", $utilisateur, $motDePasse);
 
-        // Définir le mode d'erreur PDO à exception
+
         $connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-        echo "Connexion réussie";
-
-        // Vous pouvez maintenant exécuter des requêtes SQL ici
     } catch (PDOException $e) {
         die("Échec de la connexion : " . $e->getMessage());
     }
 
-    // Fermer la connexion
-    // $connexion = null;
 
-    // Récupérer les valeurs du formulaire
+
+
     $email = $_POST['email'];
     $motDePasse = $_POST['mot_de_passe'];
-    // if ($email = "admin@gmail.com" and $motDePasse = "admin12345") {
-    //     header("Location: ./admin/dashboard.html");
-    // }
+
     if ($email == "admin@gmail.com" && $motDePasse == "12345678") {
 
         header("Location: ./admin/dashboard.html");
     }
 
-    // Préparer la requête SQL (assurez-vous d'ajuster la structure de votre table)
+
     $requete = $connexion->prepare("SELECT * FROM Clients WHERE email = ?");
 
-    // Exécuter la requête avec le paramètre
     $requete->execute([$email]);
 
-    // Récupérer le résultat de la requête
     $utilisateur = $requete->fetch(PDO::FETCH_ASSOC);
-
-    // Vérifier si l'utilisateur existe et le mot de passe est correct
 
 
     if ($utilisateur && password_verify($motDePasse, $utilisateur['mot_de_passe'])) {
-        // Enregistrez l'ID de l'utilisateur dans la session
+
         $_SESSION['idclient'] = $utilisateur['idclient'];
         $_SESSION['nom'] = $utilisateur['nom'];
         $_SESSION['email'] = $utilisateur['email'];
         $_SESSION['prenom'] = $utilisateur['prenom'];
 
-        // Rediriger vers la page d'accueil
+
         header("Location: profil.php");
         exit();
     } else {

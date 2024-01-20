@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $motDePasseHash = password_hash($motDePasse, PASSWORD_DEFAULT);
 
 
-    // Vérifier si l'email existe déjà dans la base de données
+
     $requeteEmailExiste = $connexion->prepare("SELECT idclient FROM Clients WHERE email = ?");
     $requeteEmailExiste->execute([$email]);
     $emailExiste = $requeteEmailExiste->fetch();
@@ -34,14 +34,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($emailExiste) {
         $erreur = "Cet email est déjà utilisé. Veuillez en choisir un autre.";
     } else {
-        // Préparer la requête SQL pour l'insertion (assurez-vous d'ajuster la structure de votre table)
+
         $requeteInsertion = $connexion->prepare("INSERT INTO clients (nom, prenom, email, tel, mot_de_passe) VALUES (?, ?, ?, ?, ?)");
 
 
-        // Exécuter la requête avec les paramètres
+
         $requeteInsertion->execute([$nom, $prenom, $email, $telephone, $motDePasseHash]);
 
-        // Rediriger vers la page d'accueil ou une autre page après l'inscription
+
         header("Location: login.php");
 
         exit();
@@ -80,55 +80,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link href="css/style.css" rel="stylesheet">
     <!-- <link rel="stylesheet" href="style.css"> -->
 
-    <!-- <style>
-        h2 {
-            color: #333;
-            text-align: center;
-        }
-
-        form {
-            max-width: 400px;
-            margin: 0 auto;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            color: #555;
-        }
-
-        input {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        input[type="submit"] {
-            background-color: #7AB700;
-
-            color: #fff;
-            cursor: pointer;
-        }
-
-        input[type="submit"]:hover {
-            background-color: #7AB730;
-
-        }
-
-        @media only screen and (max-width: 600px) {
-            /* .container {
-        max-width: 100%;
-        margin: 20px;
-    } */
-
-            form {
-                max-width: 100%;
-            }
-        }
-    </style> -->
     <style>
         .style {
             display: flex;
@@ -157,21 +108,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 if (isset($erreur)) {
                     echo "<p style='color: red;'>$erreur</p>";
                 } ?>
-                <!-- <form action="" method="post">
 
-                    <div class="form-group">
-                        <input type="email" class="form-control p-4" placeholder="email" name="email" required="required" />
-                    </div>
-                    <div class="form-group">
-                        <input type="password" class="form-control p-4" placeholder="mot de passe" name="mot_de_passe" required="required" />
-                    </div>
-                    <div class="form-group">
-                        <p>Vous n'avez pas un compte <a href="inscription.php">S'inscrire</a> </p>
-                    </div>
-                    <div>
-                        <button class="btn btn-primary btn-block py-3" type="submit">Sign Up Now</button>
-                    </div>
-                </form> -->
 
                 <form action="" method="post">
                     <div class="form-group">

@@ -5,7 +5,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $return_date = $_POST["return_date"];
     $duration = $_POST["duration"];
 
-    // Faire quelque chose avec les données récupérées, par exemple les afficher
     echo "Destination: " . $destination . "<br>";
     echo "Depart Date: " . $depart_date . "<br>";
     echo "Return Date: " . $return_date . "<br>";
