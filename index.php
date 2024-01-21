@@ -490,7 +490,7 @@ if ($destinationInfo !== false) {
 
             echo '            <div class="col-lg-4 col-md-6 mb-4">';
             echo '                <div class="package-item bg-white mb-2">';
-            echo '                    <img class="img-fluid" src="' . $destination['Image'] . '" alt="">'; // Assurez-vous d'ajuster le chemin de l'image
+            echo '                    <img class="img-fluid" src="' . $destination['Image'] . '" alt="">';
             echo '                    <div class="p-4">';
             echo '                        <div class="d-flex justify-content-between mb-3">';
             echo '                            <small class="m-0"><i class="fa fa-map-marker-alt text-primary mr-2"></i>' . $nomDestination . '</small>';
@@ -518,9 +518,9 @@ if ($destinationInfo !== false) {
             echo '                </div>';
             echo '            </div>';
 
-            // Vérifier si une note a été attribuée
+
             if ($ratingGiven) {
-                break; // Sortir de la boucle
+                break;
             }
         }
 
@@ -669,6 +669,7 @@ if ($destinationInfo !== false) {
                         echo '<div class="text-center">';
                         echo '    <img class="img-fluid mx-auto" src="img/testimonial-4.jpg" style="width: 100px; height: 100px;">';
                         echo '    <div class="testimonial-text bg-white p-4 mt-n5">';
+                        echo '        <p class="mt-5">' . $row['DestinationID'] . '</p>';
                         echo '        <p class="mt-5">' . $row['Commentaire'] . '</p>';
 
                         echo '        <p class="mt-5">' . $_SESSION['nomDestination']  . '</p>';
@@ -681,7 +682,7 @@ if ($destinationInfo !== false) {
                     echo "Erreur lors de la récupération des commentaires : " . $e->getMessage();
                 }
 
-                // Fermer la connexion à la base de données
+
                 $dbh = null;
                 ?>
 
@@ -719,15 +720,17 @@ if ($destinationInfo !== false) {
 
     <script>
         function rate(selectedStar, destinationId) {
+
             $.ajax({
                 type: "POST",
                 url: "script.php",
                 data: {
                     starNumber: selectedStar,
-                    destinationId: <?php echo $destinationId; ?> // Correction ici
+                    destinationId: <?php echo $destinationId; ?>
                 },
                 success: function(response) {
-                    console.log(response);
+                    alert('vous avez noter la destination')
+
                 }
             });
         }

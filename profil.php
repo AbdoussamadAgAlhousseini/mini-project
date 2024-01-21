@@ -395,10 +395,17 @@ if ($destinationInfo !== false) {
                 $couleurTexte = imagecolorallocate($image, 0, 0, 0);
 
                 // Dessiner les informations de réservation sur l'image
-                imagestring($image, 5, 10, 20, "Destination: $nomDestination", $couleurTexte);
-                imagestring($image, 5, 10, 40, "Date de départ: " . $reservation['DateDepart'], $couleurTexte);
-                imagestring($image, 5, 10, 60, "Date de retour: " . $reservation['DateRetour'], $couleurTexte);
-                imagestring($image, 5, 10, 80, "Nombre de passagers: " . $reservation['NombrePassagers'], $couleurTexte);
+
+                global $prenom;
+                global $nom_utilisateur;
+
+
+                // Dessiner les informations de réservation sur l'image
+                imagestring($image, 5, 10, 20, "Prenom et nom: $prenom  $nom_utilisateur", $couleurTexte);
+                imagestring($image, 5, 10, 40, "Destination: $nomDestination", $couleurTexte);
+                imagestring($image, 5, 10, 60, "Date de depart: " . $reservation['DateDepart'], $couleurTexte);
+                imagestring($image, 5, 10, 80, "Date de retour: " . $reservation['DateRetour'], $couleurTexte);
+                imagestring($image, 5, 10, 100, "Nombre de passagers: " . $reservation['NombrePassagers'], $couleurTexte);
 
                 // Enregistrer l'image dans un fichier avec un identifiant unique (ID de réservation)
                 $idReservation = $reservation['ReservationVolID'];
@@ -477,18 +484,22 @@ if ($destinationInfo !== false) {
                 echo "<h6>Nombre de personnes</h6>";
                 echo $reservationHotel['NombrePersonnes'];
 
-
                 $largeurImage = 500;
                 $hauteurImage = 100;
                 $image = imagecreate($largeurImage, $hauteurImage);
                 $couleurFond = imagecolorallocate($image, 255, 255, 255);
                 $couleurTexte = imagecolorallocate($image, 0, 0, 0);
 
+                global $prenom;
+                global $nom_utilisateur;
+
+
                 // Dessiner les informations de réservation sur l'image
-                imagestring($image, 5, 10, 20, "Destination: $nomDestination", $couleurTexte);
-                imagestring($image, 5, 10, 40, "Date de départ: " . $reservationHotel['DateDebut'], $couleurTexte);
-                imagestring($image, 5, 10, 60, "Date de retour: " . $reservationHotel['DateFin'], $couleurTexte);
-                imagestring($image, 5, 10, 80, "Nombre de passagers: " . $reservationHotel['NombrePersonnes'], $couleurTexte);
+                imagestring($image, 5, 10, 20, "Prenom et nom: $prenom  $nom_utilisateur", $couleurTexte);
+                imagestring($image, 5, 10, 40, "Destination: $nomDestination", $couleurTexte);
+                imagestring($image, 5, 10, 60, "Date de debut: " . $reservationHotel['DateDebut'], $couleurTexte);
+                imagestring($image, 5, 10, 80, "Date de fin: " . $reservationHotel['DateFin'], $couleurTexte);
+                imagestring($image, 5, 10, 100, "Nombre de passagers: " . $reservationHotel['NombrePersonnes'], $couleurTexte);
 
                 // Enregistrer l'image dans un fichier avec un identifiant unique (ID de réservation)
                 $idReservationh = $reservationHotel['ReservationHotelID'];
@@ -632,15 +643,16 @@ if ($destinationInfo !== false) {
                 // Remplacez idclient et DestinationID par les valeurs appropriées
                 $idclient = $id; // Exemple, remplacez par la valeur réelle
                 // $DestinationID = $DestinationID; // Exemple, remplacez par la valeur réelle
-                $DestinationID1 = $DestinationID;
+
 
 
                 $stmt = $dbh->prepare($sql);
                 $stmt->bindParam(':idclient', $idclient, PDO::PARAM_INT);
-                $stmt->bindParam(':DestinationID', $DestinationID1, PDO::PARAM_INT);
+                $stmt->bindParam(':DestinationID', $destinationId, PDO::PARAM_INT);
                 $stmt->bindParam(':commentaire', $commentaire, PDO::PARAM_STR);
 
                 $stmt->execute();
+                echo "<script>alert('Vous avez commenté notre service, les commentaires se trouvent sur la page d'accueil');</script>";
             }
 
             // Exécuter la requête SQL d'insertion
