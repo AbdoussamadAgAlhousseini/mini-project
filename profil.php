@@ -165,7 +165,9 @@ if ($destinationInfo !== false) {
                 </p>
             </div>
 
-            <p>id: <?php echo $id; ?></p>
+            <p>id: <?php
+                    echo $id;
+                    ?></p>
 
         </div>
     </div>
@@ -421,7 +423,7 @@ if ($destinationInfo !== false) {
                 } else {
                     echo "<p>Status : </p> <button  class='btn btn-disabled'>" . $reservation['Statut'] . "...</button>";
 
-                    echo "<br><a href='supprimeReserveration.php?id=" . $reservation['ReservationVolID'] . "' class='btn btn-danger'>Supprimer cette réservation</a><br><br>";
+                    echo "<br><a href='supprimeReserveration.php?id=" . $reservation['ReservationVolID'] . "' class='btn btn-danger'>Annuler cette réservation</a><br><br>";
                 }
                 echo "</div>";
                 echo "<hr>";
@@ -522,7 +524,11 @@ if ($destinationInfo !== false) {
 
                     echo "<p>Status : </p> <button  class='btn btn-disabled'>" . $reservationHotel['Statut'] . "...</button>";
 
-                    echo "<br><a href='supprimeReserveration.php?id=" . $reservationHotel['ReservationHotelID'] . "' class='btn btn-danger'>Supprimer cette réservation</a><br><br>";
+
+                    // echo "<br><a href='supprimeReserveration.php?id=" . $reservation['ReservationVolID'] . "' class='btn btn-danger'>Annuler cette réservation</a><br><br>";
+
+
+                    echo "<br><a href='supprime.php?id=" . $reservationHotel['ReservationHotelID'] . "' class='btn btn-danger'>Annuler cette réservation</a><br><br>";
                 }
                 echo "</div>";
 

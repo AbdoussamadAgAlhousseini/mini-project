@@ -30,6 +30,70 @@ if ($destinationInfo !== false) {
     $nomDestination = $destinationInfo['NomDestination'];
     $description = $destinationInfo['Description'];
 }
+
+
+
+
+
+?>
+
+
+<?php
+// Connexion à la base de données
+$servername = "localhost";
+$username = "root";
+$password = "root";
+$dbname = "projet";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Vérifier la connexion
+if ($conn->connect_error) {
+    die("La connexion a échoué : " . $conn->connect_error);
+}
+
+// Fonction pour nettoyer les données
+function sanitize_data($data)
+{
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}
+
+// Vérifier si le formulaire a été soumis
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Récupérer et nettoyer l'adresse e-mail
+    $email = sanitize_data($_POST["email"]);
+
+    // Vérifier si l'adresse e-mail est valide
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        echo "L'adresse e-mail n'est pas valide.";
+        exit();
+    }
+
+
+    $check_query = "SELECT * FROM newsletter WHERE email = '$email'";
+    $result = $conn->query($check_query);
+
+    if ($result->num_rows > 0) {
+        echo "<script>alert('cet email existe déja')</script>";
+
+        exit();
+    }
+
+
+    $insert_query = "INSERT INTO newsletter (email) VALUES ('$email')";
+
+    if ($conn->query($insert_query) === TRUE) {
+        echo "<script>alert('inscription a la newsletter effectuée')</script>";
+    } else {
+        echo "Erreur lors de l'inscription : " . $conn->error;
+    }
+}
+
+// Fermer la connexion à la base de données
+$conn->close();
 ?>
 
 
@@ -155,7 +219,6 @@ if ($destinationInfo !== false) {
         </div>
     </div>
     <!-- Topbar End -->
-
 
 
 

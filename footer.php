@@ -36,7 +36,7 @@
                     <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Destination</a>
                     <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Services</a>
                     <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Packages</a>
-                    <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Guides</a>
+                    <a class="text-white-50 mb-2" href="faq.php"><i class="fa fa-angle-right mr-2"></i>FAQs</a>
                     <a class="text-white-50 mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Testimonial</a>
 
                 </div>
@@ -48,12 +48,12 @@
                 <p><i class="fa fa-envelope mr-2"></i>abdoussamad1952@gmail.com</p>
                 <h6 class="text-white text-uppercase mt-4 mb-3" style="letter-spacing: 5px;">Newsletter</h6>
                 <div class="w-100">
-                    <div class="input-group">
-                        <input type="text" class="form-control border-light" style="padding: 25px;" placeholder="Your Email">
+                    <form method="post" action="index.php" class="input-group">
+                        <input type="text" name="email" class="form-control border-light" style="padding: 25px;" placeholder="Your Email">
                         <div class="input-group-append">
-                            <button class="btn btn-primary px-3">S'inscrire</button>
+                            <button type="submit" class="btn btn-primary px-3">S'inscrire</button>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
